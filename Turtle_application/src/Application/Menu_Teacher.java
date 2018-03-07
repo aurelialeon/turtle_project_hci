@@ -74,7 +74,8 @@ public class Menu_Teacher extends JFrame implements ActionListener{
             //Identification_Teacher id = new Identification_Teacher(); 
             this.dispose();
         } else if (e.getSource() == exploreB) {
-            //Identification_Teacher id = new Identification_Teacher(); 
+            Exploration ex = new Exploration();
+            ex.createTree();
             this.dispose();
         } else if (e.getSource() == evaluationB) {
             //Identification_Teacher id = new Identification_Teacher(); 
