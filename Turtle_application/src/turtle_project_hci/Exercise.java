@@ -25,7 +25,6 @@ public class Exercise {
      */
     public Exercise(Attempt attempt){
         this.attempt = new Attempt();
-        
     }
 
     /**

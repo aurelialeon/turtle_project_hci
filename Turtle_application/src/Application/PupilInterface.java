@@ -1,24 +1,18 @@
 package Application;
 import java.awt.*;
 import java.awt.event.*;
-import java.net.URL;
 import javax.swing.*;
-import java.io.IOException;
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
-import javax.swing.JDialog;
+
 import javax.swing.JLabel;
-import javax.swing.SwingUtilities;
 
 /**
  * 07/03/2018
  * @author Felix
  */
-public final class PupilInterface extends JFrame{
-    private JPanel pupilInterface;
-    private JButton enterSubmitBtn, exerciceBtn, attemptVisuBtn, resultVisuBtn;
-    private JLabel imageEnter;
-    private JTextField pupilLogin;
+public final class PupilInterface extends JFrame implements ActionListener{
+    private final JPanel pupilInterface;
+    private final JButton enterSubmitBtn;
+    private final JTextField pupilLogin;
 
     public PupilInterface() {
         
@@ -28,31 +22,33 @@ public final class PupilInterface extends JFrame{
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
-        //---Panels-----------------
+        //---Panel-----------------
         pupilInterface = new JPanel();
         pupilInterface.setBackground(Color.WHITE);
         pupilInterface.setPreferredSize(new Dimension(200,50));
         
-        //---Buttons----------------
-        enterSubmitBtn = new JButton ();
-        exerciceBtn = new JButton ();
-        attemptVisuBtn = new JButton ();
-        resultVisuBtn = new JButton ();
+        //---Button----------------
+        enterSubmitBtn = new JButton ("Connection");
         this.add(enterSubmitBtn,BorderLayout.SOUTH);
-        
-        //---Labels-----------------
-        //imageEnter = new JLabel();
-        //imageEnter.setIcon(new ImageIcon(PupilInterface.class.getResource("/images/satisfiedSmiley.png")));
-        //this.add(imageEnter,BorderLayout.WEST);
-        
+        enterSubmitBtn.addActionListener(this);
+
         //---TextField--------------
         pupilLogin = new JTextField();
-        this.add(pupilLogin,BorderLayout.EAST);
+        this.add(pupilLogin,BorderLayout.NORTH);
         
+        //---Settings de fin--------
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
         this.pack();
         this.setVisible(true); // Setting the frame visible
+    }
+    
+    public void actionPerformed(ActionEvent e)//rend le bouton actif
+    {
+        if (e.getSource() == enterSubmitBtn) {
+            AcceuilPupil acceuilPupil = new AcceuilPupil(); 
+            this.dispose();
+        }
     }
 }
 

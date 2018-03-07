@@ -5,15 +5,20 @@
  */
 package Main;
 
-import Application.HomePage;
-
+//import Application.HomePage;
+import Application.PupilInterface;
 /**
  *
  * @author manonsacre
  */
 public class Application {
     
+    //public static void main(String[] args) {
+    //   HomePage hp = new HomePage("Application"); 
+    //}
+    
+    //Félix pour tester l'interface eleve
     public static void main(String[] args) {
-        HomePage hp = new HomePage("Application"); 
+        PupilInterface pi = new PupilInterface();
     }
 }
