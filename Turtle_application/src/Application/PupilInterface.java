@@ -9,12 +9,12 @@ import javax.swing.JLabel;
  * 07/03/2018
  * @author Felix
  */
-public final class PupilInterface extends JFrame{// implements ActionListener{
+public final class PupilInterface extends JFrame implements ActionListener{
     //private final JPanel pupilInterface;
-    //private final JButton enterSubmitBtn;
+    private final JButton enterSubmitBtn;
     private final JTextField pupilLogin;
     private final JLabel satisfyiedSmileyImage;
-
+    
     public PupilInterface() {
         //---General settings-------
         this.setTitle("Pupil Interface");
@@ -25,16 +25,16 @@ public final class PupilInterface extends JFrame{// implements ActionListener{
         //---Images----------------
         satisfyiedSmileyImage = new JLabel();
         satisfyiedSmileyImage.setIcon(new ImageIcon(PupilInterface.class.getResource("/images/satisfiedSmiley.png")));
-        satisfyiedSmileyImage.setPreferredSize(new Dimension(50,50));
+        satisfyiedSmileyImage.setPreferredSize(new Dimension(256,243));
         satisfyiedSmileyImage.setEnabled(true);
-        satisfyiedSmileyImage.setBackground(Color.BLACK);
+        satisfyiedSmileyImage.setBackground(Color.WHITE);
         this.add(satisfyiedSmileyImage, BorderLayout.WEST);
         
-        /*
+
         //---Button----------------
         enterSubmitBtn = new JButton ("Connection");
         this.add(enterSubmitBtn,BorderLayout.SOUTH);
-        enterSubmitBtn.addActionListener(this);*/
+        enterSubmitBtn.addActionListener(this);
 
         //---TextField--------------
         pupilLogin = new JTextField();
@@ -46,22 +46,11 @@ public final class PupilInterface extends JFrame{// implements ActionListener{
         this.pack();
         this.setVisible(true); // Setting the frame visible
     }   
-}
    
-    /*
     public void actionPerformed(ActionEvent e){//rend le bouton actif
         if (e.getSource() == enterSubmitBtn) {
             AcceuilPupil acceuilPupil = new AcceuilPupil(); 
             this.dispose();
         }
-    }*/
-
-
-
-        /*
-        //---Contener/Frame---------
-        Container myContainer = this.getContentPane();
-        myContainer.setLayout(new GridBagLayout());
-        myContainer.setBackground(Color.BLACK);
-        //Instantiate the grid------
-        GridBagConstraints gbc = new GridBagConstraints(); */
+   }
+}

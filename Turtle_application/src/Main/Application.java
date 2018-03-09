@@ -5,20 +5,23 @@
  */
 package Main;
 
-//import Application.HomePage;
+import Interface.Canvas;
+import Interface.CanvasTortue;
+import Interface.CreateExercise;
+import Interface.TortueG;
+import Interface.TortueRapide;
 import Application.PupilInterface;
+
+
 /**
  *
- * @author manonsacre
+ * @author Utilisateur
  */
-public class Application {
-    
-    //public static void main(String[] args) {
-    //   HomePage hp = new HomePage("Application"); 
-    //}
-    
-    //Félix pour tester l'interface eleve
+public class Application{
     public static void main(String[] args) {
+        //TortueRapide t = new TortueRapide();
+        //CreateExercise c = new CreateExercise(t);
         PupilInterface pi = new PupilInterface();
+        
     }
 }
