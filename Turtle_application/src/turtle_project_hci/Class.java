@@ -1,5 +1,5 @@
 
-package Turtle_application;
+package turtle_project_hci;
 
 import java.util.ArrayList;
 
@@ -12,6 +12,7 @@ public class Class {
     
     private String nameClass; // this is the name of the class which has just been created
     private Teacher teacher; // this is the teacher who manages the pupil's class
+    private int num_Pupils; // this is the list of pupils who make part of the class
     private ArrayList<Pupil> pupils; // this is the list of pupils who make part of the class
     
     /**
@@ -23,6 +24,7 @@ public class Class {
         this.teacher = teacher;
         this.nameClass = nameClass;
         this.pupils = new ArrayList<>(); // creation of the list of pupils
+        this.teacher.addClass(this);
     }
 
     /**
@@ -58,6 +60,22 @@ public class Class {
     }
 
     /**
+     * 
+     * @return the number of pupils in a class
+     */
+    public int getNum_Pupils() {
+        return num_Pupils;
+    }
+
+    /**
+     * 
+     * @param num_Pupils to modify the number of pupils in a class
+     */
+    public void setNum_Pupils(int num_Pupils) {
+        this.num_Pupils = num_Pupils;
+    }
+    
+    /**
      * This method allows to get the list of the pupils of the class
      * @return the pupils of the class
      */
@@ -71,7 +89,15 @@ public class Class {
      */
     public void addPupils(Pupil p){
         this.pupils.add(p);
-
+        //p.setClasse(this);
+    }
+    
+    /**
+     * This method calculates the number of pupils in a class
+     * @param pupils to calculate the number of pupils in a class
+     */
+    public void nbPupils(ArrayList<Pupil> pupils){
+        setNum_Pupils(pupils.size());
     }
     
 }

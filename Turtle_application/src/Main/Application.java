@@ -10,7 +10,8 @@ import Interface.CanvasTortue;
 import Interface.CreateExercise;
 import Interface.TortueG;
 import Interface.TortueRapide;
-import turtle_project_hci.TestCanvasTortue;
+import Application.PupilInterface;
+
 
 /**
  *
@@ -20,7 +21,7 @@ public class Application{
     public static void main(String[] args) {
         TortueRapide t = new TortueRapide();
         CreateExercise c = new CreateExercise(t);
+        //PupilInterface pi = new PupilInterface();
         
     }
 }
-

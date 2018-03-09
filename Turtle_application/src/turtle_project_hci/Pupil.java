@@ -1,6 +1,7 @@
 
-package Turtle_application;
+package turtle_project_hci;
 
+import turtle_project_hci.Class;
 import java.util.ArrayList;
 
 /**
@@ -82,6 +83,14 @@ public class Pupil extends Person{
     }
 
     /**
+     * This method is used to add a pupil in the list of a class
+     * @param p: this is the pupil to add in the list
+     */
+    public void addAttempt(Attempt a){
+        this.listAttempt.add(a);
+    }
+    
+    /**
      * This method is a getter for the list of attempts of the pupil
      * @return the list of attempts
      */
@@ -89,6 +98,12 @@ public class Pupil extends Person{
         return listAttempt;
     }
     
+    public String getPFName() {
+        return super.getFirstName();
+    }
     
+    public String getPName() {
+        return super.getName();
+    }
     
 }

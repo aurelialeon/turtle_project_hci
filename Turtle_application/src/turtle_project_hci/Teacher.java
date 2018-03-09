@@ -1,6 +1,8 @@
 
-package Turtle_application;
+package turtle_project_hci;
 
+import turtle_project_hci.Exercise;
+import turtle_project_hci.Class;
 import java.util.ArrayList;
 
 /**
@@ -13,6 +15,7 @@ public class Teacher extends Person{
     private String login; // id of the teacher
     private String password; // password of the account of the teacher
     private ArrayList<Exercise> listExercise; // list of exercises created by the teacher
+    private ArrayList<Class> listClass;
     
     /**
      * This is the constructor of the Teacher
@@ -22,6 +25,7 @@ public class Teacher extends Person{
     public Teacher(String nameTeacher, String firstNameTeacher){
         super(nameTeacher, firstNameTeacher);
         this.listExercise = new ArrayList<>();
+        this.listClass = new ArrayList<>();
     }
 
     public String getLogin() {
@@ -74,5 +78,20 @@ public class Teacher extends Person{
         this.listExercise.add(e);
     }
     
+    public void addClass(Class s){
+        this.listClass.add(s);
+    }
+
+    public ArrayList<Class> getListClass() {
+        return listClass;
+    }
+    
+    public String getFName() {
+        return super.getFirstName();
+    }
+    
+    public String getTName() {
+        return super.getName();
+    }
     
 }

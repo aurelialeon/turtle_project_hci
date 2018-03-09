@@ -5,7 +5,7 @@
  */
 package Interface;
 
-import Turtle_application.Exercise;
+import turtle_project_hci.Exercise;
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
