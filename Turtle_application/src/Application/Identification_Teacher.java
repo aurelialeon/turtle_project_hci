@@ -23,11 +23,11 @@ import javax.swing.SwingConstants;
  */
 public class Identification_Teacher extends JFrame implements ActionListener{
 
-    private JPanel identif, globalP;
+    private JPanel identif, globalP, upPanel;
     private JLabel loginLabel, passwordLabel, title;
     private JTextField loginText, passwordText;
     private JSplitPane splitId;
-    private JButton go;
+    private JButton go, newTeach;
     
     public Identification_Teacher() {
         
@@ -37,9 +37,15 @@ public class Identification_Teacher extends JFrame implements ActionListener{
         identif.setLayout(new GridLayout(2,1));
         
         globalP = new JPanel();
+        upPanel = new JPanel();
+        
+        upPanel.setLayout(new GridLayout(2,1));
         
         go = new JButton("Let's go !");
         go.addActionListener(this);
+        
+        newTeach = new JButton("New Teacher");
+        newTeach.addActionListener(this);
         
         splitId = new JSplitPane();
         splitId.setOneTouchExpandable(true);
@@ -52,6 +58,9 @@ public class Identification_Teacher extends JFrame implements ActionListener{
         passwordLabel.setHorizontalAlignment(SwingConstants.CENTER);
         title = new JLabel("Identification");
         title.setHorizontalAlignment(SwingConstants.CENTER);
+        
+        upPanel.add(title);
+        upPanel.add(newTeach);
         
         loginText = new JTextField();
         passwordText = new JTextField();
@@ -66,7 +75,7 @@ public class Identification_Teacher extends JFrame implements ActionListener{
         
         this.setLayout(new BorderLayout());
         this.add(globalP, BorderLayout.CENTER);
-        this.add(title, BorderLayout.NORTH);
+        this.add(upPanel, BorderLayout.NORTH);
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
@@ -79,6 +88,19 @@ public class Identification_Teacher extends JFrame implements ActionListener{
         if (e.getSource() == go) {
             Menu_Teacher menu = new Menu_Teacher(); 
             this.dispose();
-        } 
+        } else if (e.getSource() == newTeach) {
+            NewTeacher nt = new NewTeacher(); 
+            this.dispose();
+        }
     }
+
+    public JTextField getLoginText() {
+        return loginText;
+    }
+
+    public JTextField getPasswordText() {
+        return passwordText;
+    }
+    
+    
 }

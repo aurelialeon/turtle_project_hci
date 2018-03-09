@@ -24,7 +24,7 @@ import turtle_project_hci.Pupil;
  */
 public class Exploration extends JFrame implements ActionListener{
 
-    private JMenuItem createI, modifyI, exploreI, evaluationI, backMenu; 
+    private JMenuItem createI, modifyI, exploreI, evaluationI, addClassI, addPupI, backMenu; 
     private Donnees don;
     private JTree tree;
     private DefaultMutableTreeNode top;
@@ -54,6 +54,8 @@ public class Exploration extends JFrame implements ActionListener{
         modifyI = new JMenuItem("Modify exercice");
         exploreI = new JMenuItem("Explore Class");
         evaluationI = new JMenuItem("Evaluation");
+        addClassI = new JMenuItem("New Class");
+        addPupI = new JMenuItem("New Pupil");
         backMenu = new JMenuItem("Back to the menu");
         
         // Add the items to the menu 
@@ -61,6 +63,8 @@ public class Exploration extends JFrame implements ActionListener{
         menu.add(modifyI);
         menu.add(exploreI);
         menu.add(evaluationI);
+        menu.add(addClassI);
+        menu.add(addPupI);
         menu.add(backMenu);
         
         // Add our menu to the menubar
@@ -73,6 +77,8 @@ public class Exploration extends JFrame implements ActionListener{
         modifyI.addActionListener(this);
         exploreI.addActionListener(this);
         evaluationI.addActionListener(this);
+        addClassI.addActionListener(this);
+        addPupI.addActionListener(this);
         backMenu.addActionListener(this);
         
         this.add(tree);
@@ -97,7 +103,7 @@ public class Exploration extends JFrame implements ActionListener{
             //Identification_Teacher id = new Identification_Teacher(); 
             this.dispose();
         } else if (e.getSource() == evaluationI) {
-            //Identification_Teacher id = new Identification_Teacher(); 
+            //Identification_Teacher id = new Identification_Teacher(); "
             this.dispose();
         } else if (e.getSource() == backMenu) {
             Menu_Teacher menu = new Menu_Teacher(); 
