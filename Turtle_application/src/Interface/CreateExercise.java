@@ -168,7 +168,7 @@ public class CreateExercise extends JFrame implements ActionListener{
         this.add(panelRight, BorderLayout.EAST);
         
         //myFrame = new JFrame("Create Exercise");//give the name to the frame
-        //myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //kill the application when we close the window
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //kill the application when we close the window
             
         this.setVisible(true);
         this.pack();
