@@ -94,7 +94,7 @@ public class Exploration extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e)//rend le bouton actif
     {
         if (e.getSource() == createI) {
-            //Identification_Teacher id = new Identification_Teacher(); 
+            CreateExercises ce = new CreateExercises();
             this.dispose();
         } else if (e.getSource() == modifyI) {
             //Identification_Teacher id = new Identification_Teacher(); 

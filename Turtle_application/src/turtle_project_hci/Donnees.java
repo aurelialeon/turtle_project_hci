@@ -5,6 +5,9 @@
  */
 package turtle_project_hci;
 
+import turtle_project_hci.Teacher;
+import turtle_project_hci.Pupil;
+import turtle_project_hci.Class;
 import java.util.ArrayList;
 
 /**

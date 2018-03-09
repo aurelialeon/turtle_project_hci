@@ -76,7 +76,7 @@ public class Menu_Teacher extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e)//rend le bouton actif
     {
         if (e.getSource() == createB) {
-            //Identification_Teacher id = new Identification_Teacher(); 
+            CreateExercises ce = new CreateExercises();
             this.dispose();
         } else if (e.getSource() == modifyB) {
             //Identification_Teacher id = new Identification_Teacher(); 
