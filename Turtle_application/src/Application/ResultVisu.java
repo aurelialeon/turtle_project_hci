@@ -19,7 +19,7 @@ import javax.swing.JFrame;
  * @author Felix
  */
 public class ResultVisu extends JFrame implements ActionListener{
-    
+
     private JButton backward;
     
     public ResultVisu (){

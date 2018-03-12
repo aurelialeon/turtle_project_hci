@@ -20,7 +20,6 @@ import javax.swing.SwingUtilities;
  * @author Felix
  */
 public class AcceuilPupil extends JFrame implements ActionListener{
-    
     private JButton exerciceBtn, attemptVisuBtn, resultVisuBtn;
     
     public AcceuilPupil() {
@@ -31,10 +30,9 @@ public class AcceuilPupil extends JFrame implements ActionListener{
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
-        
         Container myContainer = this.getContentPane();
         myContainer.setLayout(new GridBagLayout());
-        myContainer.setBackground(Color.BLACK);
+        myContainer.setBackground(Color.WHITE);
         //Instantiate the grid
         GridBagConstraints gbc = new GridBagConstraints();
         //On positionne la case de départ du composant
@@ -58,8 +56,7 @@ public class AcceuilPupil extends JFrame implements ActionListener{
         myContainer.add(resultVisuBtn, gbc);
         resultVisuBtn.addActionListener(this);
         
-
-
+        //---Setting de fin-----------------------------------------------------
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
         this.pack();
