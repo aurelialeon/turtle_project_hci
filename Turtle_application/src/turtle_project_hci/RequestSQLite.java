@@ -92,8 +92,6 @@ public class RequestSQLite {
         // Declaration of the variables
         Statement stmt = null;
         ResultSet rs = null;
-        String name = null;
-        String firstName = null;
         Pupil newPupil = null;
         ArrayList<Pupil> listPupils = null;
 
@@ -122,4 +120,99 @@ public class RequestSQLite {
         }
         return (listPupils);
     }
+    
+    /**
+     * Return the list of the pupils for a class selected by its id
+     * @param idClass
+     * @return listPupils
+     */
+    public ArrayList<Pupil> FetchPupilByClass (String nameClass) {
+        ArrayList<Pupil> listPupils; 
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Pupil newPupil = null;
+        
+        listPupils = new ArrayList<Pupil>();
+        String request = "SELECT namePupil, firstNamePupil FROM Pupil WHERE nameClass = ?";
+        
+        connect();
+        
+        try {
+            pstmt = conn.prepareStatement(request);
+            pstmt.setString(1, nameClass);
+            rs = pstmt.executeQuery();
+            
+            while (rs.next()) {
+                newPupil = new Pupil (rs.getString("namePupil"),rs.getString("firstNamePupil"));
+                listPupils.add(newPupil);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return(listPupils);
+    }
+    
+    /**
+     * fetch the teacher's password in the database using his id
+     * @param idTeacher
+     * @return password
+     */
+    public String fetchPassword (int idTeacher) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String pwd = null;
+        
+        String request = "SELECT passwordTeacher FROM Teacher WHERE idTeacher = ?";
+        
+        connect(); 
+        
+        try {
+            pstmt = conn.prepareStatement(request);
+            pstmt.setInt(1, idTeacher);
+            rs = pstmt.executeQuery();
+            
+            rs.next();
+            pwd = rs.getString("passwordTeacher");
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        
+        return(pwd);
+    }
+    
+    /**
+     * fetch the teacher's password using his login
+     * @param loginTeacher
+     * @return password
+     */
+    public String fetchPassword (String loginTeacher) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String pwd = null;
+        
+        String request = "SELECT passwordTeacher FROM Teacher WHERE loginTeacher = ?";
+        
+        connect();
+        
+        try {
+            pstmt = conn.prepareStatement(request);
+            pstmt.setString(1, loginTeacher);
+            rs = pstmt.executeQuery();
+            
+            rs.next();
+            pwd = rs.getString("passwordTeacher");
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return(pwd);
+    }
+    
+    
 }

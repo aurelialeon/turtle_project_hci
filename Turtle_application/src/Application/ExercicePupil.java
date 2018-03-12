@@ -11,11 +11,11 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import turtle_project_hci.Exercise;
 
+ 
 /**
- *
  * @author Felix
  */
-public final class ExercicePupil extends JFrame implements ActionListener {
+public final class ExercicePupil extends JFrame {// implements ActionListener {
     
     private Exercise exo1;
     
@@ -26,9 +26,7 @@ public final class ExercicePupil extends JFrame implements ActionListener {
         this.setSize(1200,800);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        
-        
+
         //---Settings de fin--------
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
@@ -36,11 +34,12 @@ public final class ExercicePupil extends JFrame implements ActionListener {
         this.setVisible(true); // Setting the frame visible
     }
     
+    /*
     public void actionPerformed(ActionEvent e)//rend le bouton actif
     {
         /*if (e.getSource() == enterSubmitBtn) {
             AcceuilPupil acceuilPupil = new AcceuilPupil(); 
             this.dispose();
+<<<<<<< Upstream, based on origin/master
         }*/
-    } 
 }

@@ -18,16 +18,16 @@ import javax.swing.JFrame;
  *
  * @author Felix
  */
-public class ResultVisu extends JFrame implements ActionListener{
-    
+public class AttemptAnExercise extends JFrame implements ActionListener{
     private JButton backward;
     
-    public ResultVisu (){
+    public AttemptAnExercise () {
         //---General settings-------
-        this.setTitle("Results visualisation");
+        this.setTitle("Exercise list");
         this.setSize(1200,800);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        
         
         Container myContainer = this.getContentPane();
         myContainer.setLayout(new GridBagLayout());
@@ -45,7 +45,7 @@ public class ResultVisu extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
         this.pack();
-        this.setVisible(true); // Setting the frame visible
+        this.setVisible(true); // Setting the frame visible 
     }
     
     public void actionPerformed(ActionEvent e)
