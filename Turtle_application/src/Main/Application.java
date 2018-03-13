@@ -5,6 +5,8 @@
  */
 package Main;
 
+import Application.CreateExercises;
+import Application.HomePage;
 import Interface.Canvas;
 import Interface.CanvasTortue;
 import Interface.CreateExercise;
@@ -19,9 +21,12 @@ import Application.PupilInterface;
  */
 public class Application{
     public static void main(String[] args) {
-        TortueG t = new TortueG();
-        CreateExercise c = new CreateExercise(t);
+        HomePage hm = new HomePage("Application");
+        //TortueRapide t = new TortueRapide();
+        //CreateExercise c = new CreateExercise(t);
         //PupilInterface pi = new PupilInterface();
-        
+        //CreateExercises ce = new CreateExercises();
+        //TortueG t = new TortueG();
+        //CreateExercise c = new CreateExercise(t);
     }
 }

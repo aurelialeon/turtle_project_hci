@@ -22,7 +22,7 @@ public class Menu_Teacher extends JFrame implements ActionListener{
     
     private JSplitPane split;
     private JPanel menuPanel;
-    private JButton createB, modifyB, exploreB, evaluationB;
+    private JButton createB, modifyB, exploreB, evaluationB, addClassB, addPupB;
 
     public Menu_Teacher() {
         
@@ -46,9 +46,15 @@ public class Menu_Teacher extends JFrame implements ActionListener{
         evaluationB = new JButton("◊ Evaluation");
         evaluationB.addActionListener(this);
         
+        addClassB = new JButton("◊ Add a new Class");
+        addClassB.addActionListener(this);
+        
+        addPupB = new JButton("◊ Add a new Pupil");
+        addPupB.addActionListener(this);
+        
         JScrollPane scrollPane = new JScrollPane();
         menuPanel = new JPanel();
-        menuPanel.setLayout(new GridLayout(4, 1));
+        menuPanel.setLayout(new GridLayout(6, 1));
         //scrollPane.setViewportView(tree);
         split.setLeftComponent(menuPanel);
         split.setRightComponent(scrollPane);
@@ -57,6 +63,8 @@ public class Menu_Teacher extends JFrame implements ActionListener{
         menuPanel.add(modifyB);
         menuPanel.add(exploreB);
         menuPanel.add(evaluationB);
+        menuPanel.add(addClassB);
+        menuPanel.add(addPupB);
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
@@ -68,7 +76,7 @@ public class Menu_Teacher extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e)//rend le bouton actif
     {
         if (e.getSource() == createB) {
-            //Identification_Teacher id = new Identification_Teacher(); 
+            CreateExercises ce = new CreateExercises();
             this.dispose();
         } else if (e.getSource() == modifyB) {
             //Identification_Teacher id = new Identification_Teacher(); 
@@ -79,6 +87,12 @@ public class Menu_Teacher extends JFrame implements ActionListener{
             this.dispose();
         } else if (e.getSource() == evaluationB) {
             //Identification_Teacher id = new Identification_Teacher(); 
+            this.dispose();
+        } else if (e.getSource() == addClassB) {
+            NewClasse nc = new NewClasse(); 
+            this.dispose();
+        } else if (e.getSource() == addPupB) {
+            NewPupil np = new NewPupil(); 
             this.dispose();
         }
     }

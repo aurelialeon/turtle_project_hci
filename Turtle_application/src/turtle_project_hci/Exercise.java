@@ -146,6 +146,4 @@ public class Exercise {
     public void setListAttempt(ArrayList<Attempt> listAttempt) {
         this.listAttempt = listAttempt;
     }
-        
-    
 }

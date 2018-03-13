@@ -15,6 +15,8 @@ import java.awt.event.*;
  * @author Utilisateur
  */
 public class CreateExercise extends JFrame implements ActionListener{
+
+
     private TortueG newTurtle, normalTurtle;
     private TortueCouleur colorTurtle;
     private TortueRapide fastTurtle;
@@ -24,7 +26,7 @@ public class CreateExercise extends JFrame implements ActionListener{
     private JLabel myEmptyLabel, labelInstruction, labelMode;
     private JFrame myFrame, secondFrame, thirdFrame;
     private String result="";
-    
+
     // for the second frame
     private JLabel colorLabel, fastLabel;
     private JButton black, red, blue, green, yellow, magenta, setSpeed;
@@ -40,18 +42,18 @@ public class CreateExercise extends JFrame implements ActionListener{
         if (ae.getSource() == forward){
             while (newTurtle.getDirection()!=3){
                 newTurtle.tourner();
-                
             }
             result += "T"; //top
         }else if (ae.getSource() == left) {
             while (newTurtle.getDirection()!=2){
                 newTurtle.tourner();
-                
+
             }
             result += "L"; //left
         }else if (ae.getSource() == right){
             while (newTurtle.getDirection()!=0){
                 newTurtle.tourner(); 
+
             }
             result += "R"; //right
         }else if (ae.getSource()==backward){
@@ -62,6 +64,7 @@ public class CreateExercise extends JFrame implements ActionListener{
         }else if (ae.getSource()==unwrite){
             newTurtle.tracer(false);
             result += "U"; //unwrite
+
         }else if (ae.getSource()==write){
             newTurtle.tracer(true);
             result+="W"; //write
@@ -71,12 +74,14 @@ public class CreateExercise extends JFrame implements ActionListener{
             slowDown.setEnabled(false);
             newTurtle.reset();
             result = "";
+
         }else if (ae.getSource()== color){
             newTurtle = colorTurtle;
             speedUp.setEnabled(false);
             slowDown.setEnabled(false);
             newTurtle.reset();
             result = "";
+
             chooseMode(colorTurtle);
         }else if (ae.getSource()== fast){
             newTurtle = fastTurtle;
@@ -85,9 +90,11 @@ public class CreateExercise extends JFrame implements ActionListener{
             newTurtle.reset();
             result = "";
             chooseMode(fastTurtle);
+
         }else if (ae.getSource()== move){
             newTurtle.avancer();
             result += "M"; //move
+
         }else if (ae.getSource()== restart){
             newTurtle.reset();
             result ="";
@@ -213,17 +220,17 @@ public class CreateExercise extends JFrame implements ActionListener{
             panelGlobal2.add(fastLabel);
             panelGlobal2.add(panelRadioButtons);
             panelGlobal2.add(setSpeed);
+            
             thirdFrame = new JFrame();
             
             thirdFrame.add(panelGlobal2);
             thirdFrame.setResizable(true);
             thirdFrame.pack();
             thirdFrame.setVisible(true);
-            
-        }
 
+        }
     }
-    
+
     
     public CreateExercise(TortueG mode){
         normalTurtle = new TortueG();
@@ -232,6 +239,7 @@ public class CreateExercise extends JFrame implements ActionListener{
                 
         exo = new Exercise();
         newTurtle = mode; //set the newTurtle by default
+
         
         normal = new JButton("Graphical Turtle");
         normal.addActionListener(this);
@@ -330,6 +338,7 @@ public class CreateExercise extends JFrame implements ActionListener{
         
         //myFrame = new JFrame("Create Exercise");//give the name to the frame
         myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE); //kill the application when we close the window
+
             
         myFrame.setVisible(true);
         myFrame.pack();

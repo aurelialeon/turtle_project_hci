@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Application;
+
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
@@ -12,20 +13,17 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
-import turtle_project_hci.Exercise;
-import turtle_project_hci.Attempt;
+
 /**
  *
  * @author Felix
  */
-public class AttemptVisu extends JFrame implements ActionListener{
-    private Attempt attemps;
-    private Exercise exo; 
+public class AttemptAnExercise extends JFrame implements ActionListener{
     private JButton backward;
     
-    public AttemptVisu () {
+    public AttemptAnExercise () {
         //---General settings-------
-        this.setTitle("Attempt visualisation");
+        this.setTitle("Exercise list");
         this.setSize(1200,800);
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -47,15 +45,14 @@ public class AttemptVisu extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
         this.pack();
-        this.setVisible(true); // Setting the frame visible
-        exo.getListAttempt();        
+        this.setVisible(true); // Setting the frame visible 
     }
     
-    public void actionPerformed(ActionEvent e){
+    public void actionPerformed(ActionEvent e)
+    {
         if (e.getSource() == backward) {
-            AcceuilPupil acceuil = new AcceuilPupil(); 
+            AcceuilPupil acceuilPupil = new AcceuilPupil(); 
             this.dispose();
         }
     }
-    
 }
