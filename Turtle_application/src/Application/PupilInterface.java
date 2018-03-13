@@ -24,7 +24,7 @@ public final class PupilInterface extends JFrame implements ActionListener{
         
         //---Images----------------
         satisfyiedSmileyImage = new JLabel();
-        satisfyiedSmileyImage.setIcon(new ImageIcon(PupilInterface.class.getResource("/images/satisfiedSmiley.png")));
+        satisfyiedSmileyImage.setIcon(new ImageIcon(PupilInterface.class.getResource("/Images/satisfiedSmiley.png")));
         satisfyiedSmileyImage.setPreferredSize(new Dimension(256,243));
         satisfyiedSmileyImage.setEnabled(true);
         satisfyiedSmileyImage.setBackground(Color.WHITE);
@@ -49,6 +49,7 @@ public final class PupilInterface extends JFrame implements ActionListener{
    
     public void actionPerformed(ActionEvent e){//rend le bouton actif
         if (e.getSource() == enterSubmitBtn) {
+            
             AcceuilPupil acceuilPupil = new AcceuilPupil(); 
             this.dispose();
         }

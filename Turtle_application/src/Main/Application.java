@@ -13,7 +13,13 @@ import Interface.CreateExercise;
 import Interface.TortueG;
 import Interface.TortueRapide;
 import Application.PupilInterface;
+import java.util.ArrayList;
+import turtle_project_hci.Exercise;
+import turtle_project_hci.RequestSQLite;
 
+//import java.util.ArrayList;
+//import turtle_project_hci.RequestSQLite;
+//import turtle_project_hci.Exercise;
 
 /**
  *
@@ -21,12 +27,17 @@ import Application.PupilInterface;
  */
 public class Application{
     public static void main(String[] args) {
-        //HomePage hm = new HomePage("Application");
+        HomePage hm = new HomePage("Application");
         //TortueRapide t = new TortueRapide();
         //CreateExercise c = new CreateExercise(t);
         //PupilInterface pi = new PupilInterface();
         //CreateExercises ce = new CreateExercises();
-        //TortueG t = new TortueG();
-        //CreateExercise c = new CreateExercise(t);
+        
+        ArrayList<Exercise> p = new ArrayList<>();
+        RequestSQLite req = new RequestSQLite();
+        p = req.fetchExercisebyClass("CM1");
+        for (Exercise ex : p) {
+           System.out.println(ex.getNameExercise());
+        }
     }
 }

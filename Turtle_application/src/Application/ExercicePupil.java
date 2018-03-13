@@ -16,6 +16,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import turtle_project_hci.Attempt;
 import turtle_project_hci.Exercise;
+import javax.swing.JComboBox;
+import turtle_project_hci.RequestSQLite;
 
  
 /**
@@ -23,10 +25,11 @@ import turtle_project_hci.Exercise;
  */
 public final class ExercicePupil extends JFrame implements ActionListener
 {
-    private JButton backward, thisExercise;
+    private JButton backward;
     private JLabel text;
     private TortueG tortueR, tortueC,tortueN;
     private Exercise myExercise;
+    private JComboBox combo;
     
 /**
  * Constructor of ExercicePupil
@@ -34,8 +37,9 @@ public final class ExercicePupil extends JFrame implements ActionListener
     public ExercicePupil () {
                
         //---General settings-------
+
         this.setTitle("Exercises");
-        this.setSize(1200,800);
+        this.setPreferredSize(new Dimension(800, 400));
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
@@ -53,13 +57,24 @@ public final class ExercicePupil extends JFrame implements ActionListener
         backward.addActionListener(this);
         
         //---Grid 0, 3 -------------
-        gbc.gridy = 3;
+        gbc.gridy = 1;
         text = new JLabel("Choose an exercise it is time to exercise !");
         this.add(text, gbc);
-        thisExercise = new JButton("Exercise");
-        myContainer.add(thisExercise, gbc);
-        thisExercise.addActionListener(this);
+              
+        // Combo box : menu déroulant avec la liste des exercices
+        gbc.gridy = 2;
+        combo = new JComboBox(); // Création de la combobox
+        combo.setPreferredSize(new Dimension(100, 20));
+        ArrayList<Exercise> p = new ArrayList<>();
+        RequestSQLite req = new RequestSQLite();
+        p = req.fetchAllExerciseName();
+        for (Exercise ex : p) {
+            combo.addItem(ex.getNameExercise());
+        }
+        this.add(combo,gbc);
+        combo.addItemListener(new ItemState());
         
+
         myExercise = new Exercise();
         tortueR = new TortueG();
         tortueC = new TortueG();
@@ -72,6 +87,14 @@ public final class ExercicePupil extends JFrame implements ActionListener
         this.setVisible(true); // Setting the frame visible
     }
     
+    /**
+     * Class interne
+     */
+    class ItemState implements ItemListener {
+        public void itemStateChanged(ItemEvent e) {
+            System.out.println("événement déclenché sur : " + e.getItem());
+    }
+    }
     /*
     public void exerciceList () {
         exo.setListAttempt(ArrayList<Attempt> listAttempt);
@@ -83,42 +106,10 @@ public final class ExercicePupil extends JFrame implements ActionListener
             AcceuilPupil acceuilPupil = new AcceuilPupil(); 
             this.dispose();
         }
-        /*
-        if (e.getSource() == thisExercise) {
-            TheExercisePupil theExo = new TheExercisePupil();
-            this.dispose();
-        }*/
-    }
-}
-        /*
-        if (check1.isSelected()){
-            myExercise.setMode(tortueN);
-            if (e.getSource()== exo){
-                TortueG tg = new TortueG();
-                CreateExercise cE = new CreateExercise(tg);
-                myExercise.setInstruction(consigne.getText());
-                myExercise.setNameExercise(nameExo.getText());
-                this.dispose();
-            }
-        } else if (check2.isSelected()){
-            myExercise.setMode(tortueC);
-            if (e.getSource()== exo){
-                TortueCouleur tc = new TortueCouleur("blue");
-                CreateExercise cE = new CreateExercise(tc);
-                myExercise.setInstruction(consigne.getText());
-                myExercise.setNameExercise(nameExo.getText());
-                this.dispose();
-            }
+        
+        //if (e.getSource() == thisExercise) {
+            //TheExercisePupil theExo = new TheExercisePupil();
+            //this.dispose();
+            
         }
-        else if (check3.isSelected()){
-            myExercise.setMode(tortueR);
-            if (e.getSource()== exo){
-                TortueRapide tr = new TortueRapide();
-                CreateExercise cE = new CreateExercise(tr);
-                myExercise.setInstruction(consigne.getText());
-                myExercise.setNameExercise(nameExo.getText());
-                this.dispose();
-            }
-        } 
     }
-}*/

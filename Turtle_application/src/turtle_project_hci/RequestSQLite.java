@@ -12,18 +12,20 @@ import java.util.ArrayList;
  */
 public class RequestSQLite {
 
-    private static Connection conn = null;
+    private Connection conn = null;
 
     /**
      * Connect to the database
      */
-    public static void connect() {
+    public void connect() {
         try {
             // db parameters
             String url = "jdbc:sqlite:C:/sqlite/gui/gp4_Turtleproject.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
+
             System.out.println("Connection to SQLite has been established.");
+
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -32,7 +34,7 @@ public class RequestSQLite {
     /**
      * Deconnect from the database
      */
-    public static void deconnect() {
+    public void deconnect() {
         try {
             if (conn != null) {
                 conn.close();
@@ -49,7 +51,7 @@ public class RequestSQLite {
      * @param id
      * @return newPupil, the newly created pupil
      */
-    public static Pupil fetchOnePupil(int idPup) {
+    public Pupil fetchOnePupil(int idPup) {
         // Declaration of the variables
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -87,7 +89,7 @@ public class RequestSQLite {
      *
      * @return listPupils
      */
-    public static ArrayList<Pupil> FetchAllPupil() {
+    public ArrayList<Pupil> FetchAllPupil() {
         // Declaration of the variables
         Statement stmt = null;
         ResultSet rs = null;
@@ -120,5 +122,82 @@ public class RequestSQLite {
             deconnect();
         }
         return (listPupils);
+    }
+    
+    /**
+     * Fetch in the database all the names of the exercises
+     * @return a list of exercise names
+     */
+    public ArrayList<Exercise> fetchAllExerciseName () {
+        // Declaration of the variables
+        Statement stmt = null;
+        ResultSet rs = null;
+        Exercise newExercise = null;
+        ArrayList<Exercise> listExercise = null;
+
+        // creation of the request
+        String request = "SELECT nameEx FROM Exercise";
+
+        // connection to the database
+        connect();
+
+        try {
+            stmt = conn.createStatement(); // Creation of a statement
+
+            rs = stmt.executeQuery(request); // Execution of the query
+            
+            listExercise = new ArrayList<Exercise>();
+            
+            while (rs.next()) {
+                newExercise = new Exercise();
+                newExercise.setNameExercise(rs.getString("nameEx"));
+                listExercise.add(newExercise);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (listExercise);
+    }
+    
+    /**
+     * Fetch one pupil, using the id of this pupil in the database
+     *
+     * @param id
+     * @return newPupil, the newly created pupil
+     */
+    public ArrayList<Exercise> fetchExercisebyClass(String nameClass) {
+        // Declaration of the variables
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Exercise newExercise = null;
+        ArrayList<Exercise> listExercise = null;
+        listExercise = new ArrayList<Exercise>();
+        
+        // creation of the request
+        String request = "SELECT nameEx FROM Exercise WHERE level = ?";
+
+        // connection to the database
+        connect();
+
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setString(1, nameClass); // add the varaible into the sql request
+
+            rs = pstmt.executeQuery(); // Execution of the query
+
+            while(rs.next()){
+                newExercise = new Exercise();
+                newExercise.setNameExercise(rs.getString("nameEx"));
+                listExercise.add(newExercise);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (listExercise);
     }
 }
