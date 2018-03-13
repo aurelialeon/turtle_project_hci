@@ -211,35 +211,5 @@ public class RequestSQLite {
         return(pwd);
     }
     
-    //--------TEST DE FELIX --------
-    //--------A SUPPRIMER PAR LA SUITE
-    public Teacher InsertTeacher (int idTeacher, loginTeacher, nameTeacher, firstNameTeacher, passwordTeacher)
-    {
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        String loginTeacher;
-        String nameTeacher;
-        String firstNameTeacher;
-        String passwordTeacher;
-        Teacher newTeacher= null;
-        String request = "Insert INTO Teacher VALUES ('loginTeacher', 'nameTeacher', 'firstNameTeacher', 'passwordTeacher'";
-        connect();
-        try {
-            pstmt = conn.prepareStatement(request); // Creation of a statement
-            pstmt.setInt(3, idTeacher); // add the varaible into the sql request
-            rs = pstmt.executeQuery(); // Execution of the query
-            rs.next();
-            loginTeacher = rs.getString("loginTeacher");
-            nameTeacher = rs.getString("nameTeacher"); // get the name of the pupil in the database
-            firstNameTeacher = rs.getString("firstNameTeacher");
-            passwordTeacher = rs.getString("passwordTeacher");
-
-            newTeacher = new Teacher(loginTeacher, passwordTeacher);
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            deconnect();
-        }
-        return (newTeacher);
-    }
+    
 }

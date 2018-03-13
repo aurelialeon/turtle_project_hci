@@ -16,55 +16,172 @@ import java.awt.event.*;
  */
 public class CreateExercise extends JFrame implements ActionListener{
     private Exercise ex;
-    private TortueG newTurtle, normalTurtle, colorTurtle, fastTurtle;
+    private TortueG currentTurtle, normalTurtle;
+    private TortueCouleur colorTurtle;
+    private TortueRapide fastTurtle;
     private JButton normal, color, fast, write, unwrite, speedUp, slowDown;
     private JButton forward, backward, left, right, move, restart;
     private JPanel panelArrows, panelLabel, panelMode, panelButtonsRight, panelRight, panelPage;
     private JLabel myEmptyLabel, labelInstruction, labelMode;
-    private JFrame myFrame;
+    private JFrame myFrame, secondFrame;
+    
+    // for the second frame
+    private JLabel colorLabel, fastLabel;
+    private JButton black, red, blue, green, yellow, magenta, setSpeed;
+    private JPanel panelColor, panelGlobal;
+    private JFormattedTextField textSpeed;
+    private String c;
+    private JComboBox comboSpeed;
     
     
     public void actionPerformed (ActionEvent ae) {
         if (ae.getSource() == forward){
-            while (newTurtle.getDirection()!=3){
-                newTurtle.tourner();
+            while (currentTurtle.getDirection()!=3){
+                currentTurtle.tourner();
             }
         }else if (ae.getSource() == left) {
-            while (newTurtle.getDirection()!=2){
-                newTurtle.tourner();
+            while (currentTurtle.getDirection()!=2){
+                currentTurtle.tourner();
             }
         }else if (ae.getSource() == right){
-            while (newTurtle.getDirection()!=0){
-                newTurtle.tourner();
+            while (currentTurtle.getDirection()!=0){
+                currentTurtle.tourner();
             }
         }else if (ae.getSource()==backward){
-            while (newTurtle.getDirection()!=1){
-                newTurtle.tourner();
+            while (currentTurtle.getDirection()!=1){
+                currentTurtle.tourner();
             }
         }else if (ae.getSource()==unwrite){
-            newTurtle.tracer(false);
+            currentTurtle.tracer(false);
         }else if (ae.getSource()==write){
-            newTurtle.tracer(true);
+            currentTurtle.tracer(true);
         }else if (ae.getSource()== normal){
-            newTurtle = normalTurtle;
+            currentTurtle = normalTurtle;
             speedUp.setEnabled(false);
             slowDown.setEnabled(false);
-            newTurtle.reset();
+            currentTurtle.reset();
         }else if (ae.getSource()== color){
-            newTurtle = colorTurtle;
+            currentTurtle = colorTurtle;
             speedUp.setEnabled(false);
             slowDown.setEnabled(false);
-            newTurtle.reset();
+            currentTurtle.reset();
+            chooseMode(colorTurtle);
         }else if (ae.getSource()== fast){
-            newTurtle = fastTurtle;
+            currentTurtle = fastTurtle;
             speedUp.setEnabled(true);
             slowDown.setEnabled(true);
-            newTurtle.reset();
+            currentTurtle.reset();
         }else if (ae.getSource()== move){
-            newTurtle.avancer();
+            currentTurtle.avancer();
         }else if (ae.getSource()== restart){
-            newTurtle.reset();
-        }        
+            currentTurtle.reset();
+        } else if (ae.getSource()==black){
+            currentTurtle = new TortueCouleur("black");
+            secondFrame.dispose();
+        } else if (ae.getSource()==red){
+            currentTurtle = new TortueCouleur("red");
+            secondFrame.dispose();
+        } else if (ae.getSource()==blue){
+            currentTurtle = new TortueCouleur("blue");
+            secondFrame.dispose();
+        } else if (ae.getSource()==green){
+            currentTurtle = new TortueCouleur("green");
+            secondFrame.dispose();
+        } else if (ae.getSource()==yellow){
+            currentTurtle = new TortueCouleur("yellow");
+            secondFrame.dispose();
+        } else if (ae.getSource()==magenta){
+            currentTurtle = new TortueCouleur("magenta");
+            secondFrame.dispose();
+        } else if (ae.getSource()==setSpeed){
+            currentTurtle = new TortueRapide();
+            //mode.setVitesse(1);
+           // s=(int).comboSpeed.getSelectedItem()
+            /**String[] speed = {"1", "2", "3", "4", "5", "6", "7"};
+            JOptionPane jop = new JOptionPane();
+            String getSpeed = (String)jop.showInputDialog(null, 
+            "Set the initial speed of your turtle:",
+            "Set speed",
+            JOptionPane.QUESTION_MESSAGE,
+            null,
+            speed,
+            speed[2]);
+            //c = setSpeed.getText();
+            //if ("1".equals(c)|"2".equals(c)|"3".equals(c)|"4".equals(c)|"5".equals(c)|"6".equals(c)|"7".equals(c)|"8".equals(c)|"9".equals(c)){
+                
+            //}*/
+        }
+    }
+    
+    public void chooseMode(TortueG mode){
+        if (mode==colorTurtle){
+            colorLabel = new JLabel("Choose a color for your Color Turtle:");
+            black = new JButton(new ImageIcon(getClass().getResource("/images/blackcolor_opt.png")));
+            black.addActionListener(this);
+            
+            red = new JButton(new ImageIcon(getClass().getResource("/images/red_opt.png")));
+            red.addActionListener(this);
+            
+            blue = new JButton(new ImageIcon(getClass().getResource("/images/blue_opt.png")));
+            blue.addActionListener(this);
+            
+            green = new JButton(new ImageIcon(getClass().getResource("/images/green_opt.png")));
+            green.addActionListener(this);
+            
+            yellow = new JButton(new ImageIcon(getClass().getResource("/images/yellow_opt.jpg")));
+            yellow.addActionListener(this);
+            
+            magenta = new JButton(new ImageIcon(getClass().getResource("/images/magenta_opt.png")));
+            magenta.addActionListener(this);
+            
+            panelColor = new JPanel();
+            panelColor.setLayout(new GridLayout(1,6));
+            panelColor.add(black);
+            panelColor.add(red);
+            panelColor.add(blue);
+            panelColor.add(green);
+            panelColor.add(yellow);
+            panelColor.add(magenta);
+            
+            panelGlobal = new JPanel();
+            panelGlobal.setLayout(new GridLayout(2,1));
+            panelGlobal.add(colorLabel);
+            panelGlobal.add(panelColor);
+            
+            secondFrame = new JFrame();
+
+            secondFrame.add(panelGlobal);
+            secondFrame.setResizable(true);
+            secondFrame.pack();
+            secondFrame.setVisible(true);
+            
+        }else if (mode==fastTurtle){
+            fastLabel = new JLabel("Set the initial speed of your turtle:");
+            setSpeed = new JButton("Set Speed");
+            //textSpeed = new JTextField();
+            comboSpeed = new JComboBox();
+            comboSpeed.addItem(1);
+            comboSpeed.addItem(2);
+            comboSpeed.addItem(3);
+            comboSpeed.addItem(4);
+            comboSpeed.addItem(5);
+            comboSpeed.addItem(6);
+            comboSpeed.addItem(7);
+            //textSpeed = new JFormattedTextField();
+            
+            panelGlobal = new JPanel();
+            panelGlobal.setLayout(new GridLayout(3,1));
+            panelGlobal.add(fastLabel);
+            panelGlobal.add(comboSpeed);
+            panelGlobal.add(setSpeed);
+            
+            secondFrame.add(panelGlobal);
+            secondFrame.setResizable(true);
+            secondFrame.pack();
+            secondFrame.setVisible(true);
+            
+        }
+
     }
     
     
@@ -75,7 +192,7 @@ public class CreateExercise extends JFrame implements ActionListener{
         JPanel canv = Canvas.getCanvasPanel();
         this.add(canv, BorderLayout.CENTER);
         
-        newTurtle = mode; //set the mode by default
+        currentTurtle = mode; //set the mode by default
         
         normal = new JButton("Graphical Turtle");
         normal.addActionListener(this);
