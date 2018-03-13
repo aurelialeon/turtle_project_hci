@@ -89,10 +89,10 @@ public class Menu_Teacher extends JFrame implements ActionListener{
             //Identification_Teacher id = new Identification_Teacher(); 
             this.dispose();
         } else if (e.getSource() == addClassB) {
-            //Identification_Teacher id = new Identification_Teacher(); 
+            NewClasse nc = new NewClasse(); 
             this.dispose();
         } else if (e.getSource() == addPupB) {
-            //Identification_Teacher id = new Identification_Teacher(); 
+            NewPupil np = new NewPupil(); 
             this.dispose();
         }
     }
