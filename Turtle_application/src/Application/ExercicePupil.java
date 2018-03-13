@@ -122,5 +122,3 @@ public final class ExercicePupil extends JFrame implements ActionListener
         } 
     }
 }*/
-
-}

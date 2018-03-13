@@ -15,7 +15,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import RequestSQLite.
+
 /**
  *
  * @author manonsacre
