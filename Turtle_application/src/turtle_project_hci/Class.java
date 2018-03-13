@@ -70,6 +70,11 @@ public class Class {
     /**
      * 
      * @param num_Pupils to modify the number of pupils in a class
+     * 
+     * 
+     * NE SERT A RIEN
+     * 
+     * 
      */
     public void setNum_Pupils(int num_Pupils) {
         this.num_Pupils = num_Pupils;
@@ -95,6 +100,10 @@ public class Class {
     /**
      * This method calculates the number of pupils in a class
      * @param pupils to calculate the number of pupils in a class
+     * 
+     * 
+     * NE SERT A RIEN
+     * 
      */
     public void nbPupils(ArrayList<Pupil> pupils){
         setNum_Pupils(pupils.size());

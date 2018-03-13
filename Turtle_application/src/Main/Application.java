@@ -21,7 +21,7 @@ import Application.PupilInterface;
  */
 public class Application{
     public static void main(String[] args) {
-        HomePage hm = new HomePage("Application");
+        //HomePage hm = new HomePage("Application");
         //TortueRapide t = new TortueRapide();
         //CreateExercise c = new CreateExercise(t);
         //PupilInterface pi = new PupilInterface();

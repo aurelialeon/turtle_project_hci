@@ -12,20 +12,18 @@ import java.util.ArrayList;
  */
 public class RequestSQLite {
 
-    private Connection conn = null;
+    private static Connection conn = null;
 
     /**
      * Connect to the database
      */
-    public void connect() {
+    public static void connect() {
         try {
             // db parameters
             String url = "jdbc:sqlite:C:/sqlite/gui/gp4_Turtleproject.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
-
             System.out.println("Connection to SQLite has been established.");
-
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         }
@@ -34,7 +32,7 @@ public class RequestSQLite {
     /**
      * Deconnect from the database
      */
-    public void deconnect() {
+    public static void deconnect() {
         try {
             if (conn != null) {
                 conn.close();
@@ -51,7 +49,7 @@ public class RequestSQLite {
      * @param id
      * @return newPupil, the newly created pupil
      */
-    public Pupil fetchOnePupil(int idPup) {
+    public static Pupil fetchOnePupil(int idPup) {
         // Declaration of the variables
         PreparedStatement pstmt = null;
         ResultSet rs = null;
@@ -89,7 +87,7 @@ public class RequestSQLite {
      *
      * @return listPupils
      */
-    public ArrayList<Pupil> FetchAllPupil() {
+    public static ArrayList<Pupil> FetchAllPupil() {
         // Declaration of the variables
         Statement stmt = null;
         ResultSet rs = null;
