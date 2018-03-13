@@ -19,7 +19,7 @@ import Application.PupilInterface;
  */
 public class Application{
     public static void main(String[] args) {
-        TortueRapide t = new TortueRapide();
+        TortueG t = new TortueG();
         CreateExercise c = new CreateExercise(t);
         //PupilInterface pi = new PupilInterface();
         

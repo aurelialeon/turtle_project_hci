@@ -136,7 +136,7 @@ public class Exercise {
      */
     public void performAttempt(String answer){
         setNbAttempt(++nbAttempt); // increments the number of attempts for this exercise
-        attempt.setAnswer(answer);
+        //attempt.setAnswer(answer);
     }
 
     public ArrayList<Attempt> getListAttempt() {
