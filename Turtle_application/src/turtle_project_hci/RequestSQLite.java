@@ -211,5 +211,68 @@ public class RequestSQLite {
         return(pwd);
     }
     
+    /**
+     * Fetch a teacher object in the database using his id
+     * @param idTeacher
+     * @return newTeacher
+     */
+    public Teacher fetchTeacherName(int idTeacher) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Teacher newTeacher = null;
+        
+        String request = "SELECT nameTeacher, firstNameTeacher FROM Teacher WHERE idTeacher = ?";
+        
+        connect();
+        
+        try {
+            pstmt = conn.prepareStatement(request);
+            pstmt.setInt(1,idTeacher);
+            rs = pstmt.executeQuery();
+            
+            rs.next();
+            newTeacher = new Teacher(rs.getString("nameTeacher"),rs.getString("firstNameTeacher"));
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return(newTeacher);
+    }
     
+    /** 
+     * Fetch the class name using the id of its teacher
+     * @param idTeacher
+     * @return newClass
+     */
+    public Class fetchClassName(int idTeacher) {
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Class newClass = null;
+        Teacher newTeacher = null;
+        
+        RequestSQLite req = null;
+        req = new RequestSQLite();
+        
+        String request = "SELECT nameClass FROM Class WHERE idTeacher = ?";
+        
+        connect();
+        
+        try {
+            pstmt = conn.prepareStatement(request);
+            pstmt.setInt(1,idTeacher);
+            rs = pstmt.executeQuery();
+
+            newTeacher = req.fetchTeacherName(idTeacher);
+            
+            rs.next();
+            newClass = new Class(newTeacher,rs.getString("nameClass"));
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return(newClass);
+    }
 }
