@@ -123,4 +123,44 @@ public class RequestSQLite {
         }
         return (listPupils);
     }
+    
+    /**
+     * Fetch in the database all the names of the exercises
+     * @return a list of exercise names
+     */
+    public ArrayList<Exercise> fetchAllExerciseName () {
+        // Declaration of the variables
+        Statement stmt = null;
+        ResultSet rs = null;
+        Exercise newExercise = null;
+        ArrayList<Exercise> listExercise = null;
+
+        // creation of the request
+        String request = "SELECT nameEx FROM Exercise";
+
+        // connection to the database
+        connect();
+
+        try {
+            stmt = conn.createStatement(); // Creation of a statement
+
+            rs = stmt.executeQuery(request); // Execution of the query
+            
+            listExercise = new ArrayList<Exercise>();
+            
+            while (rs.next()) {
+                newExercise = new Exercise();
+                newExercise.setNameExercise(rs.getString("nameEx"));
+                listExercise.add(newExercise);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (listExercise);
+    }
+    
+
 }
