@@ -27,5 +27,11 @@ public class Application{
         //PupilInterface pi = new PupilInterface();
         //CreateExercises ce = new CreateExercises();
         
+//        ArrayList<Exercise> p = new ArrayList<>();
+//        RequestSQLite req = new RequestSQLite();
+//        p = req.fetchExercisebyClass("CM1");
+//        for (Exercise ex : p) {
+//            System.out.println(ex.getNameExercise());
+        
     }
 }
