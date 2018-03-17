@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -20,7 +21,8 @@ public class RequestSQLite {
     public void connect() {
         try {
             // db parameters
-            String url = "jdbc:sqlite:C:/sqlite/gui/gp4_Turtleproject.db";
+            //String url = "jdbc:sqlite:C/sqlite/gui/gp4_Turtleproject.db";
+            String url = "jdbc:sqlite:/Users/manonsacre/sqlite/gui/gp4_Turtleproject.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
 
@@ -237,13 +239,87 @@ public class RequestSQLite {
         }
         return (listAttempt);
     }
+        /**
+         * Takes the id of the Pupil and his answer to get the id of the exercise
+         * @param idPupil
+         * @param answerPupil
+         * @return listExoId
+         */
+        public int fetchExId (int idPupil, String answerPupil) {
+        // Declaration of the variables
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String request;
+        int exId = 0;
+        
+        request = "SELECT idExercise FROM Attempt WHERE idPupil = ? AND answerPupil = ?";
+        
+        // connection to the database
+        connect();
+
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setInt(1, idPupil); // add the varaible into the sql request
+            pstmt.setString(2, answerPupil);
+            
+            rs = pstmt.executeQuery(); // Execution of the query
+
+            while(rs.next()){
+                exId = rs.getInt("idExercise");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (exId);
+    }
     
+         /**
+         * Takes the id of the exercise to get the name of the exercise
+         * @param idExercise
+         * @return exoName
+         */
+        public String fetchExerciseName (int idExercise) {
+        // Declaration of the variables
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String request;
+        String exoName = null;
+        
+        request = "SELECT nameEx FROM Exercise WHERE idExercise = ?";
+        
+        // connection to the database
+        connect();
+
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setInt(1, idExercise); // add the varaible into the sql request
+            
+            rs = pstmt.executeQuery(); // Execution of the query
+
+            rs.next();
+            exoName = rs.getString("nameEx");
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (exoName);
+    }
+        
+    /**
+     * Count the total number of attempts for one pupil
+     * @param idPupil
+     * @return numAttempt
+     */
     public int fetchNumberofAttempt (int idPupil){
         // Declaration of the variables
         PreparedStatement pstmt = null;
         ResultSet rs = null;
         String request;
-        int NumAttempt = 0;
+        int numAttempt = 0;
         
         request = "SELECT COUNT(*) FROM Attempt WHERE idPupil = ?";
         
@@ -257,12 +333,80 @@ public class RequestSQLite {
             rs = pstmt.executeQuery(); // Execution of the query
 
             rs.next();
-            NumAttempt = rs.getInt(1);
+            numAttempt = rs.getInt(1);
         } catch (SQLException e) {
             System.out.println(e.getMessage());
         } finally {
             deconnect();
         }
-        return (NumAttempt);
+        return (numAttempt);
+    }
+    
+     /**
+     * Fetch a pupil with a given login
+     * @param login
+     * @return a boolean which allow to access the pupil part
+     */
+        public boolean fetchLogin (String login){
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String request;
+        boolean resultat = false;
+        request = "SELECT loginPupil FROM Pupil WHERE loginPupil = ?";
+        connect();
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setString(1, login); // add the varaible into the sql request
+            rs = pstmt.executeQuery(); // Execution of the query  
+            String mdp = rs.getString(1);
+            while(rs.next()){
+                if(mdp.equals(login)){
+                    JOptionPane.showMessageDialog(null, "Authentification réussie !");
+                    resultat = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Login Incorrect !");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (resultat);
+    }
+        
+     /**
+     * Fetch a teacher with a given identification and password
+     * @param id
+     * @param pwd
+     * @return a boolean which allow to access the teacher part
+     */
+        public boolean authentificationTeacher (String login, String pwd){
+        PreparedStatement pstmt, pstmt2 = null;
+        ResultSet rs, rs2 = null;
+        String request, request2;
+        boolean resultat = false;
+        request = "SELECT loginTeacher FROM Teacher WHERE loginTeacher = ? AND passwordTeacher = ?";
+        connect();
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setString(1, login); // add the varaible into the sql request
+            pstmt.setString(2, pwd); // add the varaible into the sql request
+            rs = pstmt.executeQuery(); // Execution of the query  
+            
+            String mdp = rs.getString(1);
+            
+            if (mdp.equals(login)){
+                JOptionPane.showMessageDialog(null, "Authentification réussie !");
+                resultat = true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Login or password Incorrect !");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (resultat);
     }
 }
