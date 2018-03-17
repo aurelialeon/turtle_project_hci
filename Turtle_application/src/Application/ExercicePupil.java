@@ -64,7 +64,9 @@ public final class ExercicePupil extends JFrame implements ActionListener
         // Combo box : menu déroulant avec la liste des exercices
         gbc.gridy = 2;
         combo = new JComboBox(); // Création de la combobox
-        combo.setPreferredSize(new Dimension(100, 20));
+
+        combo.setPreferredSize(new Dimension(400, 200));
+
         ArrayList<Exercise> p = new ArrayList<>();
         RequestSQLite req = new RequestSQLite();
         p = req.fetchAllExerciseName();
@@ -110,6 +112,40 @@ public final class ExercicePupil extends JFrame implements ActionListener
         //if (e.getSource() == thisExercise) {
             //TheExercisePupil theExo = new TheExercisePupil();
             //this.dispose();
-            
-        }
     }
+        /*
+        if (check1.isSelected()){
+            myExercise.setMode(tortueN);
+            if (e.getSource()== exo){
+                TortueG tg = new TortueG();
+                CreateExercise cE = new CreateExercise(tg);
+                myExercise.setInstruction(consigne.getText());
+                myExercise.setNameExercise(nameExo.getText());
+                this.dispose();
+            }
+        } else if (check2.isSelected()){
+            myExercise.setMode(tortueC);
+            if (e.getSource()== exo){
+                TortueCouleur tc = new TortueCouleur("blue");
+                CreateExercise cE = new CreateExercise(tc);
+                myExercise.setInstruction(consigne.getText());
+                myExercise.setNameExercise(nameExo.getText());
+                this.dispose();
+            }
+=======
+>>>>>>> origin/master
+        }
+<<<<<<< HEAD
+        else if (check3.isSelected()){
+            myExercise.setMode(tortueR);
+            if (e.getSource()== exo){
+                TortueRapide tr = new TortueRapide();
+                CreateExercise cE = new CreateExercise(tr);
+                myExercise.setInstruction(consigne.getText());
+                myExercise.setNameExercise(nameExo.getText());
+                this.dispose();
+            }
+        } 
+    }*/
+ 
+}

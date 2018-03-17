@@ -16,6 +16,7 @@ import javax.swing.JPanel;
 import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import turtle_project_hci.RequestSQLite;
 
 /**
  *
@@ -86,8 +87,17 @@ public class Identification_Teacher extends JFrame implements ActionListener{
     public void actionPerformed(ActionEvent e)//rend le bouton actif
     {
         if (e.getSource() == go) {
-            Menu_Teacher menu = new Menu_Teacher(); 
-            this.dispose();
+            String login = loginText.getText();
+            String pwd = passwordText.getText();
+            boolean authentificationTeacher;
+            RequestSQLite req = new RequestSQLite();
+            authentificationTeacher = req.authentificationTeacher(login, pwd);
+            
+            if (authentificationTeacher == true) {
+                Menu_Teacher menu = new Menu_Teacher(); 
+                this.dispose();
+            }
+           
         } else if (e.getSource() == newTeach) {
             NewTeacher nt = new NewTeacher(); 
             this.dispose();

@@ -12,9 +12,9 @@ public class Attempt {
     
     //private int nbAttempt; // this is the number of attempts that have been performed on a specific exercise
     private Date dateAttempt; // this is the date corresponding to each attempt
-    //private Exercise exo; // this is the exercise corresponding to the attempt performed
+    private Exercise exo; // this is the exercise corresponding to the attempt performed
     private String answer; // this is the answer given by the pupil
-    
+
     /**
      * This is the constructor of the attempt Class
      */
@@ -31,7 +31,15 @@ public class Attempt {
     public Date getDateAttempt() {
         return dateAttempt;
     }
-
+    
+    /**
+     * This method sets the date of the attempt
+     * @param newDate 
+     */
+    public void setDate (Date newDate) {
+        this.dateAttempt = newDate;
+    }
+    
     /**
      * This method sets the answer of the pupil during the attempt
      * @param answer : this is the answer of the pupil to the exercise
@@ -48,5 +56,11 @@ public class Attempt {
         return answer;
     }
 
-    
+    public Exercise getExo() {
+        return exo;
+    }
+
+    public void setExo(Exercise exo) {
+        this.exo = exo;
+    }
 }
