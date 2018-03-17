@@ -5,6 +5,7 @@ import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -162,5 +163,249 @@ public class RequestSQLite {
         return (listExercise);
     }
     
+    /**
+     * Fetch one pupil, using the id of this pupil in the database
+     *
+     * @param id
+     * @return newPupil, the newly created pupil
+     */
+    public ArrayList<Exercise> fetchExercisebyClass(String nameClass) {
+        // Declaration of the variables
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        Exercise newExercise = null;
+        ArrayList<Exercise> listExercise = null;
+        listExercise = new ArrayList<Exercise>();
+        
+        // creation of the request
+        String request = "SELECT nameEx FROM Exercise WHERE level = ?";
 
+        // connection to the database
+        connect();
+
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setString(1, nameClass); // add the varaible into the sql request
+
+            rs = pstmt.executeQuery(); // Execution of the query
+
+            while(rs.next()){
+                newExercise = new Exercise();
+                newExercise.setNameExercise(rs.getString("nameEx"));
+                listExercise.add(newExercise);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (listExercise);
+    }
+    
+    /**
+     * Fetch in the database the list of attempt for one Pupil
+     * @return 
+     */
+    public ArrayList<Attempt> fetchAttemptList (int idPupil) {
+        // Declaration of the variables
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String request;
+        Attempt newAttempt;
+        ArrayList<Attempt> listAttempt;
+        listAttempt = new ArrayList<Attempt>();
+        
+        request = "SELECT answerPupil FROM Attempt WHERE idPupil = ?";
+        
+        // connection to the database
+        connect();
+
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setInt(1, idPupil); // add the varaible into the sql request
+
+            rs = pstmt.executeQuery(); // Execution of the query
+
+            while(rs.next()){
+                newAttempt = new Attempt();
+                newAttempt.setAnswer(rs.getString("answerPupil"));
+                listAttempt.add(newAttempt);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (listAttempt);
+    }
+        /**
+         * Takes the id of the Pupil and his answer to get the id of the exercise
+         * @param idPupil
+         * @param answerPupil
+         * @return listExoId
+         */
+        public int fetchExId (int idPupil, String answerPupil) {
+        // Declaration of the variables
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String request;
+        int exId = 0;
+        
+        request = "SELECT idExercise FROM Attempt WHERE idPupil = ? AND answerPupil = ?";
+        
+        // connection to the database
+        connect();
+
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setInt(1, idPupil); // add the varaible into the sql request
+            pstmt.setString(2, answerPupil);
+            
+            rs = pstmt.executeQuery(); // Execution of the query
+
+            while(rs.next()){
+                exId = rs.getInt("idExercise");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (exId);
+    }
+    
+         /**
+         * Takes the id of the exercise to get the name of the exercise
+         * @param idExercise
+         * @return exoName
+         */
+        public String fetchExerciseName (int idExercise) {
+        // Declaration of the variables
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String request;
+        String exoName = null;
+        
+        request = "SELECT nameEx FROM Exercise WHERE idExercise = ?";
+        
+        // connection to the database
+        connect();
+
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setInt(1, idExercise); // add the varaible into the sql request
+            
+            rs = pstmt.executeQuery(); // Execution of the query
+
+            rs.next();
+            exoName = rs.getString("nameEx");
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (exoName);
+    }
+        
+    /**
+     * Count the total number of attempts for one pupil
+     * @param idPupil
+     * @return numAttempt
+     */
+    public int fetchNumberofAttempt (int idPupil){
+        // Declaration of the variables
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String request;
+        int numAttempt = 0;
+        
+        request = "SELECT COUNT(*) FROM Attempt WHERE idPupil = ?";
+        
+        // connection to the database
+        connect();
+
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setInt(1, idPupil); // add the varaible into the sql request
+
+            rs = pstmt.executeQuery(); // Execution of the query
+
+            rs.next();
+            numAttempt = rs.getInt(1);
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (numAttempt);
+    }
+    
+     /**
+     * Fetch a pupil with a given login
+     * @param login
+     * @return a boolean which allow to access the pupil part
+     */
+        public boolean fetchLogin (String login){
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String request;
+        boolean resultat = false;
+        request = "SELECT loginPupil FROM Pupil WHERE loginPupil = ?";
+        connect();
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setString(1, login); // add the varaible into the sql request
+            rs = pstmt.executeQuery(); // Execution of the query  
+            String mdp = rs.getString(1);
+            while(rs.next()){
+                if(mdp.equals(login)){
+                    JOptionPane.showMessageDialog(null, "Authentification réussie !");
+                    resultat = true;
+                } else {
+                    JOptionPane.showMessageDialog(null, "Login Incorrect !");
+                }
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (resultat);
+    }
+        
+     /**
+     * Fetch a teacher with a given identification and password
+     * @param id
+     * @param pwd
+     * @return a boolean which allow to access the teacher part
+     */
+        public boolean authentificationTeacher (String login, String pwd){
+        PreparedStatement pstmt, pstmt2 = null;
+        ResultSet rs, rs2 = null;
+        String request, request2;
+        boolean resultat = false;
+        request = "SELECT loginTeacher FROM Teacher WHERE loginTeacher = ? AND passwordTeacher = ?";
+        connect();
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setString(1, login); // add the varaible into the sql request
+            pstmt.setString(2, pwd); // add the varaible into the sql request
+            rs = pstmt.executeQuery(); // Execution of the query  
+            
+            String mdp = rs.getString(1);
+            
+            if (mdp.equals(login)){
+                JOptionPane.showMessageDialog(null, "Authentification réussie !");
+                resultat = true;
+            } else {
+                JOptionPane.showMessageDialog(null, "Login or password Incorrect !");
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (resultat);
+    }
 }

@@ -1,9 +1,11 @@
 package Application;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 import javax.swing.*;
 
 import javax.swing.JLabel;
+import turtle_project_hci.RequestSQLite;
 
 /**
  * 07/03/2018
@@ -24,12 +26,11 @@ public final class PupilInterface extends JFrame implements ActionListener{
         
         //---Images----------------
         satisfyiedSmileyImage = new JLabel();
-        satisfyiedSmileyImage.setIcon(new ImageIcon(PupilInterface.class.getResource("/images/satisfiedSmiley.png")));
-        satisfyiedSmileyImage.setPreferredSize(new Dimension(256,243));
+        satisfyiedSmileyImage.setIcon(new ImageIcon(PupilInterface.class.getResource("/Images/AccueilPupil.png")));
+        satisfyiedSmileyImage.setPreferredSize(new Dimension(250,250));
         satisfyiedSmileyImage.setEnabled(true);
         satisfyiedSmileyImage.setBackground(Color.WHITE);
         this.add(satisfyiedSmileyImage, BorderLayout.WEST);
-        
 
         //---Button----------------
         enterSubmitBtn = new JButton ("Connection");
@@ -44,13 +45,23 @@ public final class PupilInterface extends JFrame implements ActionListener{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
         this.pack();
-        this.setVisible(true); // Setting the frame visible
+        this.setVisible(true);
     }   
    
-    public void actionPerformed(ActionEvent e){//rend le bouton actif
+    public void actionPerformed(ActionEvent e){
         if (e.getSource() == enterSubmitBtn) {
-            AcceuilPupil acceuilPupil = new AcceuilPupil(); 
-            this.dispose();
+            String login = pupilLogin.getText();
+            
+            boolean fetchLog;
+            RequestSQLite req = new RequestSQLite();
+            fetchLog = req.fetchLogin(login);
+            
+            if (fetchLog == true){
+                System.out.println(fetchLog);
+                AcceuilPupil acceuilPupil = new AcceuilPupil();
+                this.dispose();
+            }
         }
    }
 }
+

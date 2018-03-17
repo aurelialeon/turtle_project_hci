@@ -14,21 +14,29 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import turtle_project_hci.Attempt;
-import turtle_project_hci.Exercise;
+import javax.swing.JComboBox;
 import turtle_project_hci.RequestSQLite;
 
- 
+
+
+
+
+
 /**
  * @author Felix
  */
 public final class ExercicePupil extends JFrame
 {
+
     private JButton backward, thisExercise;
     private JLabel text, instruLabel, picLabel, myEmptyLabel;
     private TortueG tortueN, newTurtle;
     private TortueCouleur tortueC;
     private TortueRapide tortueR;
+
+
     private Exercise myExercise;
+
     
     private JFrame myFrame, frameOne, frameTwo;
     private JButton write, unwrite, speedUp, slowDown;
@@ -37,23 +45,24 @@ public final class ExercicePupil extends JFrame
     private JComboBox combo;
     private JPanel canv, canvToFill, panelArrows, panelButtonsRight, panelRight;
     private String answer = "";
+
+
+
     
 /**
  * Constructor of ExercicePupil
  */
     public ExercicePupil () {
         ActionExPupil ep = new ActionExPupil(this);
-        
+
         myExercise = new Exercise();
         
-        //---General settings-------
         frameOne = new JFrame();
         frameOne.setTitle("Exercises");
         frameOne.setSize(1200,800);
         frameOne.setLocationRelativeTo(null);
         frameOne.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-        
-        
+
         Container myContainer = frameOne.getContentPane();
         myContainer.setLayout(new GridBagLayout());
         myContainer.setBackground(Color.WHITE);
@@ -67,10 +76,11 @@ public final class ExercicePupil extends JFrame
         backward.addActionListener(ep);
         
         //---Grid 0, 3 -------------
-        gbc.gridy = 3;
+        gbc.gridy = 1;
         text = new JLabel("Choose an exercise it is time to exercise !");
+
         frameOne.add(text, gbc);
-        
+
         // Combo box : menu deroulant avec la liste des exercices
         gbc.gridy = 2;
         combo = new JComboBox(); // Creation de la combobox
@@ -95,11 +105,7 @@ public final class ExercicePupil extends JFrame
         thisExercise = new JButton("Exercise");
         frameOne.add(thisExercise, gbc);
         thisExercise.addActionListener(ep);
-        
-        /**myExercise = new Exercise();
-        tortueR = new TortueG();
-        tortueC = new TortueG();
-        tortueN = new TortueG();*/
+
         
         //---Settings de fin--------
         frameOne.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -166,6 +172,14 @@ public final class ExercicePupil extends JFrame
         
     }
     
+    /**
+     * Class interne
+     */
+    class ItemState implements ItemListener {
+        public void itemStateChanged(ItemEvent e) {
+            System.out.println("événement déclenché sur : " + e.getItem());
+    }
+    }
     /*
     public void exerciceList () {
         exo.setListAttempt(ArrayList<Attempt> listAttempt);

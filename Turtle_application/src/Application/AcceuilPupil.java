@@ -26,7 +26,7 @@ public class AcceuilPupil extends JFrame implements ActionListener{
         
         //---General settings-------
         this.setTitle("Tableau de bord");
-        this.setSize(1200,800);
+        this.setPreferredSize(new Dimension(400, 200));
         this.setLocationRelativeTo(null);
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
