@@ -5,6 +5,7 @@
  */
 package Application;
 
+import Controller.ActListEcouteur;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -15,20 +16,23 @@ import javax.swing.JFrame;
  *
  * @author manonsacre
  */
-public class HomePage extends JFrame implements ActionListener{
+public class HomePage extends JFrame {
     
     private JButton pup, teach;
+    private ActListEcouteur a;
 
     public HomePage(String s) {
         
         this.setTitle(s);
         
+        a = new ActListEcouteur(this);
+        
         pup = new JButton("Start Exercice");
         //pup.setPreferredSize(new Dimension(40,40));
-        pup.addActionListener(this);
+        pup.addActionListener(a);
         
         teach = new JButton("Teacher");
-        teach.addActionListener(this);
+        teach.addActionListener(a);
         
         this.setLayout(new BorderLayout());
         this.add(pup, BorderLayout.CENTER);

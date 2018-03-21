@@ -5,6 +5,7 @@
  */
 package Application;
 
+import Controller.ActionsCreationExercise;
 import Interface.Canvas;
 import Interface.TortueCouleur;
 import Interface.TortueG;

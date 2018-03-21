@@ -21,7 +21,8 @@ public class RequestSQLite {
     public void connect() {
         try {
             // db parameters
-            String url = "jdbc:sqlite:C:/sqlite/gui/gp4_Turtleproject.db";
+            //String url = "jdbc:sqlite:C/sqlite/gui/gp4_Turtleproject.db";
+            String url = "jdbc:sqlite:/Users/manonsacre/sqlite/gui/gp4_Turtleproject.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
 
@@ -227,7 +228,7 @@ public class RequestSQLite {
             rs = pstmt.executeQuery(); // Execution of the query
 
             while(rs.next()){
-                newAttempt = new Attempt();
+                newAttempt = new Attempt(null);
                 newAttempt.setAnswer(rs.getString("answerPupil"));
                 listAttempt.add(newAttempt);
             }

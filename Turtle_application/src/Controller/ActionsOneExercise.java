@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Application;
+package Controller;
 
+import Application.CreateOneExercise;
 import Application.CreateOneExercise;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
