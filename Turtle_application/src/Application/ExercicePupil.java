@@ -20,8 +20,6 @@ import turtle_project_hci.RequestSQLite;
 
 
 
-
-
 /**
  * @author Felix
  */
