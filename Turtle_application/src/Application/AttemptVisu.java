@@ -74,8 +74,6 @@ public class AttemptVisu extends JFrame implements ActionListener{
          
     }
     
-    
-    
     /**
      * Create the gridLayout containing the list of attempt for a pupil
      * @return tableAttempt

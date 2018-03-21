@@ -18,9 +18,10 @@ public class Attempt {
     /**
      * This is the constructor of the attempt Class
      */
-    public Attempt(){
+    public Attempt(String answer){
         Date d = new Date(); // every time an attempt is performed, the date checked is the actual one
         dateAttempt = d;
+        this.answer = answer;
 
     }
     

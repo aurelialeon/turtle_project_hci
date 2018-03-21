@@ -26,8 +26,9 @@ public final class PupilInterface extends JFrame implements ActionListener{
         
         //---Images----------------
         satisfyiedSmileyImage = new JLabel();
-        satisfyiedSmileyImage.setIcon(new ImageIcon(PupilInterface.class.getResource("/Images/AccueilPupil.png")));
-        satisfyiedSmileyImage.setPreferredSize(new Dimension(250,250));
+        //satisfyiedSmileyImage.setIcon(new ImageIcon(PupilInterface.class.getResource("/Images/AccueilPupil.png")));
+        satisfyiedSmileyImage.setIcon(new ImageIcon(PupilInterface.class.getResource("/Images/hello.gif")));
+        satisfyiedSmileyImage.setPreferredSize(new Dimension(480,370));
         satisfyiedSmileyImage.setEnabled(true);
         satisfyiedSmileyImage.setBackground(Color.WHITE);
         this.add(satisfyiedSmileyImage, BorderLayout.WEST);

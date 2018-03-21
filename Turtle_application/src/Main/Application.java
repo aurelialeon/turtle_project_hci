@@ -9,13 +9,14 @@ import Application.CreateExercises;
 import Application.HomePage;
 import Interface.Canvas;
 import Interface.CanvasTortue;
-import Interface.CreateExercise;
+import Application.CreateOneExercise;
 import Interface.TortueG;
 import Interface.TortueRapide;
 import Application.PupilInterface;
 import java.util.ArrayList;
 import turtle_project_hci.Exercise;
 import turtle_project_hci.RequestSQLite;
+import Interface.TortueCouleur;
 
 //import java.util.ArrayList;
 //import turtle_project_hci.RequestSQLite;
@@ -29,7 +30,7 @@ public class Application{
     public static void main(String[] args) {
         HomePage hm = new HomePage("Application");
         //TortueRapide t = new TortueRapide();
-        //CreateExercise c = new CreateExercise(t);
+        //CreateExercise c = new CreateOneExercise(t);
         //PupilInterface pi = new PupilInterface();
         //CreateExercises ce = new CreateExercises();
         

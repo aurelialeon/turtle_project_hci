@@ -228,7 +228,7 @@ public class RequestSQLite {
             rs = pstmt.executeQuery(); // Execution of the query
 
             while(rs.next()){
-                newAttempt = new Attempt();
+                newAttempt = new Attempt(null);
                 newAttempt.setAnswer(rs.getString("answerPupil"));
                 listAttempt.add(newAttempt);
             }
