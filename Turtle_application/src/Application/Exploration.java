@@ -28,10 +28,14 @@ public class Exploration extends JFrame implements ActionListener{
     private Donnees don;
     private JTree tree;
     private DefaultMutableTreeNode top;
+    private Identification_Teacher id;
     
     public Exploration() {
         
         this.setTitle("Exploration");
+        
+        id = new Identification_Teacher();
+        id.setVisible(false);
         
         don = new Donnees();
         
@@ -106,12 +110,13 @@ public class Exploration extends JFrame implements ActionListener{
             //Identification_Teacher id = new Identification_Teacher(); "
             this.dispose();
         } else if (e.getSource() == backMenu) {
-            Menu_Teacher menu = new Menu_Teacher(); 
+            Menu_Teacher menu = new Menu_Teacher(id.getCurrentTeacher()); 
             this.dispose();
         }
     }
     
     public void createTree() {
+        //for (Class classe : id.getCurrentTeacher().getListClass(id.getCurrentTeacher().getIdT())) {
         for (Class classe : don.getTeach1().getListClass()) {
             DefaultMutableTreeNode laClasse = new DefaultMutableTreeNode(
                     (classe.getNameClass()));

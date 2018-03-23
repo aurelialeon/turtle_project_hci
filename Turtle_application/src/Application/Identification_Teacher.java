@@ -17,6 +17,7 @@ import javax.swing.JSplitPane;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import turtle_project_hci.RequestSQLite;
+import turtle_project_hci.Teacher;
 
 /**
  *
@@ -29,6 +30,7 @@ public class Identification_Teacher extends JFrame implements ActionListener{
     private JTextField loginText, passwordText;
     private JSplitPane splitId;
     private JButton go, newTeach;
+    private Teacher currentTeacher;
     
     public Identification_Teacher() {
         
@@ -92,16 +94,14 @@ public class Identification_Teacher extends JFrame implements ActionListener{
             boolean authentificationTeacher;
             RequestSQLite req = new RequestSQLite();
             authentificationTeacher = req.authentificationTeacher(login, pwd);
+            currentTeacher = req.fetchTeacher(login, pwd);
             
             if (authentificationTeacher == true) {
-                Menu_Teacher menu = new Menu_Teacher(); 
+                Menu_Teacher menu = new Menu_Teacher(currentTeacher); 
                 this.dispose();
             }
            
-        } else if (e.getSource() == newTeach) {
-            NewTeacher nt = new NewTeacher(); 
-            this.dispose();
-        }
+        } 
     }
 
     public JTextField getLoginText() {
@@ -111,6 +111,9 @@ public class Identification_Teacher extends JFrame implements ActionListener{
     public JTextField getPasswordText() {
         return passwordText;
     }
-    
+
+    public Teacher getCurrentTeacher() {
+        return currentTeacher;
+    }
     
 }

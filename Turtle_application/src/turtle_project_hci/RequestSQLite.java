@@ -409,4 +409,123 @@ public class RequestSQLite {
         }
         return (resultat);
     }
+        
+     /**
+     * Fetch a teacher with a given identification and password
+     * @param id
+     * @param pwd
+     * @return a boolean which allow to access the teacher part
+     */
+        public Teacher fetchTeacher (String login, String pwd){
+        PreparedStatement pstmt, pstmt2 = null;
+        ResultSet rs, rs2 = null;
+        String request, request2;
+        Teacher teach = null;
+        request = "SELECT * FROM Teacher WHERE loginTeacher = ? AND passwordTeacher = ?";
+        connect();
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setString(1, login); // add the varaible into the sql request
+            pstmt.setString(2, pwd); // add the varaible into the sql request
+            rs = pstmt.executeQuery(); // Execution of the query  
+            
+            String mdp = rs.getString(1);
+            
+            if (mdp.equals(login)){
+                rs.next();
+                teach = new Teacher(rs.getString("nameTeacher"),rs.getString("firstNameTeacher"));
+                teach.setLogin(login);
+                teach.setPassword(pwd);
+                teach.setIdT(rs.getInt("idTeacher"));
+                //JOptionPane.showMessageDialog(null, "Authentification réussie !");
+                //resultat = true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return teach;
+    }
+        
+        /**
+     * Fetch a teacher with a given identification and password
+     * @param id
+     * @param instruction
+     * @return a boolean which allow to access the teacher part
+     */
+        public Teacher saveExercice (String nameEx, String instruction){
+        PreparedStatement pstmt, pstmt2 = null;
+        ResultSet rs, rs2 = null;
+        String request, request2;
+        Teacher teach = null;
+        request = "INSERT INTO Teacher WHERE loginTeacher = ? AND passwordTeacher = ?";
+        connect();
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setString(1, nameEx); // add the varaible into the sql request
+            pstmt.setString(2, instruction); // add the varaible into the sql request
+            rs = pstmt.executeQuery(); // Execution of the query  
+            
+            String mdp = rs.getString(1);
+            
+            if (mdp.equals(nameEx)){
+                rs.next();
+                teach = new Teacher(rs.getString("nameTeacher"),rs.getString("firstNameTeacher"));
+                teach.setLogin(nameEx);
+                teach.setPassword(instruction);
+                teach.setIdT(rs.getInt("idTeacher"));
+                //JOptionPane.showMessageDialog(null, "Authentification réussie !");
+                //resultat = true;
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return teach;
+    }
+        
+        
+            /**
+     * fetch all the pupils in the database
+     *
+     * @return listPupils
+     */
+    public ArrayList<Class> FetchTeacherClass(int idTeacher) {
+        // Declaration of the variables
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String nameClass = null;
+        String firstName = null;
+        Teacher newTeacher = null;
+        Class newClass = null;
+        ArrayList<Class> listClass = null;
+
+        // creation of the request
+        String request = "SELECT * FROM Class where idTeacher = ? ";
+
+        // connection to the database
+        connect();
+
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setInt(1, idTeacher); // add the varaible into the sql request
+
+            rs = pstmt.executeQuery(request); // Execution of the query
+            
+            listClass = new ArrayList<Class>();
+            
+            while (rs.next()) {
+                newClass = new Class(newTeacher,rs.getString("nameClass"));
+                listClass.add(newClass);
+            }
+            
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (listClass);
+    }
 }

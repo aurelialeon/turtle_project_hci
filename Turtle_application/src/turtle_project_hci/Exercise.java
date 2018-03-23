@@ -23,6 +23,7 @@ public class Exercise {
     private TortueRapide modeR;
     private int nbAttempt = 0;// this is the number of attempts that have been performed on a specific exercise
     private ArrayList<Attempt> listAttempt;
+    private Class level;
     
     /**
      * This is the constructor of the Exercise class
@@ -172,6 +173,14 @@ public class Exercise {
     
     public void addAttempt(Attempt e){
         this.listAttempt.add(e);
+    }
+
+    public Class getLevel() {
+        return level;
+    }
+
+    public void setLevel(Class level) {
+        this.level = level;
     }
     
     
