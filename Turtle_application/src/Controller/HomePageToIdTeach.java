@@ -8,21 +8,26 @@ package Controller;
 import Application.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 
 /**
  *
  * @author manonsacre
  */
-public class ActListEcouteur implements ActionListener{
+public class HomePageToIdTeach implements ActionListener{
 
     private HomePage hp;
+    private JButton butt;
     
-    public ActListEcouteur(HomePage acc) {
+    public HomePageToIdTeach(HomePage acc, JButton b) {
         hp = acc;
+        butt = b;
     }
     
     public void actionPerformed(ActionEvent ae){
-        hp.actionPerformed(ae);
+        if (ae.getSource() == butt) {
+            hp.setPanel(new Identification_Teacher()); 
+        }
     }
     
 }

@@ -21,8 +21,8 @@ public class RequestSQLite {
     public void connect() {
         try {
             // db parameters
-            String url = "jdbc:sqlite:C:\\sqlite\\gui\\gp4_Turtleproject.db";
-            //String url = "jdbc:sqlite:/Users/manonsacre/sqlite/gui/gp4_Turtleproject.db";
+            //String url = "jdbc:sqlite:C:\\sqlite\\gui\\gp4_Turtleproject.db";
+            String url = "jdbc:sqlite:/Users/manonsacre/sqlite/gui/gp4_Turtleproject.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
 
@@ -487,15 +487,16 @@ public class RequestSQLite {
     }
         
         
-            /**
+      /**
      * fetch all the pupils in the database
      *
      * @return listPupils
      */
-    public ArrayList<Class> FetchTeacherClass(int idTeacher) {
+    public ArrayList<Class> FetchTeacherClass(Teacher teach) {
         // Declaration of the variables
         PreparedStatement pstmt = null;
         ResultSet rs = null;
+        ResultSet rs2 = null;
         String nameClass = null;
         String firstName = null;
         Teacher newTeacher = null;
@@ -504,13 +505,14 @@ public class RequestSQLite {
 
         // creation of the request
         String request = "SELECT * FROM Class where idTeacher = ? ";
-
+        newTeacher = teach;
+        
         // connection to the database
         connect();
 
         try {
             pstmt = conn.prepareStatement(request); // Creation of a statement
-            pstmt.setInt(1, idTeacher); // add the varaible into the sql request
+            pstmt.setInt(1, teach.getIdT()); // add the varaible into the sql request
 
             rs = pstmt.executeQuery(request); // Execution of the query
             
@@ -528,4 +530,5 @@ public class RequestSQLite {
         }
         return (listClass);
     }
+    
 }

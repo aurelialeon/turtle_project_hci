@@ -15,12 +15,18 @@ import javax.swing.ImageIcon;
 import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.SwingUtilities;
+import Controller.ControllerMenuPupuilEx;
+import Controller.ControllerMenuPupilResult;
+import Controller.ControllerMenuPupilAttempt;
 /**
  *
  * @author Felix
  */
-public class AcceuilPupil extends JFrame implements ActionListener{
+public class AcceuilPupil extends JFrame{
     private JButton exerciceBtn, attemptVisuBtn, resultVisuBtn;
+    private ControllerMenuPupuilEx controlE;
+    private ControllerMenuPupilResult controlR;
+    private ControllerMenuPupilAttempt controlA;
     
     public AcceuilPupil() {
         
@@ -42,37 +48,27 @@ public class AcceuilPupil extends JFrame implements ActionListener{
         //---1er case du grid---------------------------------------------------
         exerciceBtn = new JButton("Exercices");
         myContainer.add(exerciceBtn, gbc);
-        exerciceBtn.addActionListener(this);
+        controlE = new ControllerMenuPupuilEx(this, exerciceBtn);
+        exerciceBtn.addActionListener(controlE);
         
         //---2eme case----------------------------------------------------------
         gbc.gridy = 1;
         attemptVisuBtn = new JButton("Visualiser vos tentatives");
         myContainer.add(attemptVisuBtn, gbc);
-        attemptVisuBtn.addActionListener(this);
+        controlA = new ControllerMenuPupilAttempt(this,attemptVisuBtn);
+        attemptVisuBtn.addActionListener(controlA);
         
         //---3eme case----------------------------------------------------------
         gbc.gridy = 2;
         resultVisuBtn = new JButton("Visualiser vos résultats");
         myContainer.add(resultVisuBtn, gbc);
-        resultVisuBtn.addActionListener(this);
+        controlR = new ControllerMenuPupilResult(this,resultVisuBtn);
+        resultVisuBtn.addActionListener(controlR);
         
         //---Setting de fin-----------------------------------------------------
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
         this.pack();
         this.setVisible(true); // Setting the frame visible
-    }
-    
-    public void actionPerformed(ActionEvent e){
-        if (e.getSource() == exerciceBtn) {
-            AccueilExPupil exoPupil = new AccueilExPupil(); 
-            this.dispose();
-        } else if (e.getSource() == attemptVisuBtn) {
-            AttemptVisu aV = new AttemptVisu();
-            this.dispose();
-        } else if (e.getSource() == resultVisuBtn) {
-            ResultVisu rV = new ResultVisu();
-            this.dispose();
-        } 
     }
 }

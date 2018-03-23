@@ -31,7 +31,7 @@ import turtle_project_hci.RequestSQLite;
  */
 public class Application{
     public static void main(String[] args) {
-        HomePage hm = new HomePage("Application");
+        HomePage hm = new HomePage();
         //TortueRapide t = new TortueRapide();
         //CreateExercise c = new CreateOneExercise(t);
         //PupilInterface pi = new PupilInterface();

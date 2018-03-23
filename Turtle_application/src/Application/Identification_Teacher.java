@@ -5,6 +5,7 @@
  */
 package Application;
 
+import Controller.IdTeachToMenu;
 import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -23,18 +24,19 @@ import turtle_project_hci.Teacher;
  *
  * @author manonsacre
  */
-public class Identification_Teacher extends JFrame implements ActionListener{
+public class Identification_Teacher extends JPanel{
 
     private JPanel identif, globalP, upPanel;
     private JLabel loginLabel, passwordLabel, title;
     private JTextField loginText, passwordText;
     private JSplitPane splitId;
-    private JButton go, newTeach;
+    private JButton go;
     private Teacher currentTeacher;
+    private IdTeachToMenu controller;
     
     public Identification_Teacher() {
         
-        this.setTitle("Identification Page");
+        //this.setTitle("Identification Page");
         
         identif = new JPanel();
         identif.setLayout(new GridLayout(2,1));
@@ -45,10 +47,8 @@ public class Identification_Teacher extends JFrame implements ActionListener{
         upPanel.setLayout(new GridLayout(2,1));
         
         go = new JButton("Let's go !");
-        go.addActionListener(this);
-        
-        newTeach = new JButton("New Teacher");
-        newTeach.addActionListener(this);
+        controller = new IdTeachToMenu(this, go);
+        go.addActionListener(controller);
         
         splitId = new JSplitPane();
         splitId.setOneTouchExpandable(true);
@@ -63,7 +63,6 @@ public class Identification_Teacher extends JFrame implements ActionListener{
         title.setHorizontalAlignment(SwingConstants.CENTER);
         
         upPanel.add(title);
-        upPanel.add(newTeach);
         
         loginText = new JTextField();
         passwordText = new JTextField();
@@ -80,29 +79,12 @@ public class Identification_Teacher extends JFrame implements ActionListener{
         this.add(globalP, BorderLayout.CENTER);
         this.add(upPanel, BorderLayout.NORTH);
         
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(true);
-        this.pack();
+        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //this.setResizable(true);
+        //this.pack();
         this.setVisible(true);
     }
     
-    public void actionPerformed(ActionEvent e)//rend le bouton actif
-    {
-        if (e.getSource() == go) {
-            String login = loginText.getText();
-            String pwd = passwordText.getText();
-            boolean authentificationTeacher;
-            RequestSQLite req = new RequestSQLite();
-            authentificationTeacher = req.authentificationTeacher(login, pwd);
-            currentTeacher = req.fetchTeacher(login, pwd);
-            
-            if (authentificationTeacher == true) {
-                Menu_Teacher menu = new Menu_Teacher(currentTeacher); 
-                this.dispose();
-            }
-           
-        } 
-    }
 
     public JTextField getLoginText() {
         return loginText;

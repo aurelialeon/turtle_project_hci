@@ -5,12 +5,12 @@
  */
 package Application;
 
-import Controller.ActListEcouteur;
+import Controller.HPToPupInt;
+import Controller.HomePageToIdTeach;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
@@ -19,24 +19,17 @@ import javax.swing.JFrame;
 public class HomePage extends JFrame {
     
     private JButton pup, teach;
-    private ActListEcouteur a;
+    private HomePageToIdTeach a;
+    private HPToPupInt cd;
+    private JPanel globalPanel;
 
-    public HomePage(String s) {
+    public HomePage() {
         
-        this.setTitle(s);
-        
-        a = new ActListEcouteur(this);
-        
-        pup = new JButton("Start Exercice");
-        //pup.setPreferredSize(new Dimension(40,40));
-        pup.addActionListener(a);
-        
-        teach = new JButton("Teacher");
-        teach.addActionListener(a);
+        this.setTitle("Application");
         
         this.setLayout(new BorderLayout());
-        this.add(pup, BorderLayout.CENTER);
-        this.add(teach, BorderLayout.NORTH);
+        //this.add(globalPanel, BorderLayout.CENTER);
+        this.setPanel(getGlobalPan());
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
@@ -44,18 +37,26 @@ public class HomePage extends JFrame {
         this.pack();
         this.setVisible(true);
     }
-    
-    
-    public void actionPerformed(ActionEvent e)//rend le bouton actif
-    {
-        if (e.getSource() == pup) {
-            PupilInterface pupIn = new PupilInterface(); 
-            this.dispose();
-        } else if (e.getSource() == teach) {
-            Identification_Teacher id = new Identification_Teacher(); 
-            this.dispose();
-        }
+   
+    public void setPanel(JPanel panel) {
+        this.setContentPane(panel);
+        this.revalidate();
     }
     
-    
+    public JPanel getGlobalPan(){
+        pup = new JButton("Start Exercice");
+        cd = new HPToPupInt(this, pup);
+        //pup.setPreferredSize(new Dimension(40,40));
+        pup.addActionListener(cd);
+        
+        teach = new JButton("Teacher");
+        a = new HomePageToIdTeach(this, teach);
+        teach.addActionListener(a);  
+        
+        globalPanel = new JPanel(new GridLayout(2,1));
+        globalPanel.add(teach);
+        globalPanel.add(pup);
+        
+        return globalPanel;
+    }
 }

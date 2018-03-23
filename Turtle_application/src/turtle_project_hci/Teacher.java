@@ -86,8 +86,8 @@ public class Teacher extends Person{
         this.listClass.add(s);
     }
 
-    public ArrayList<Class> getListClass(int id) {
-        return req.FetchTeacherClass(id);
+    public ArrayList<Class> getListClass(Teacher t) {
+        return req.FetchTeacherClass(t);
     }
     
     public ArrayList<Class> getListClass() {
