@@ -5,32 +5,31 @@
  */
 package Controller;
 
+import Application.AttemptVisu;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
-import Application.AttemptVisu;
 
 /**
  *
- * @author manonsacre
+ * @author cleme
  */
-public class ActionReattemptExercise implements ActionListener{
 
-    private JButton attempt;
-    private AttemptVisu av;
-    private int id;
+public class ActionReattemptExercise implements ActionListener {
     
-    public ActionReattemptExercise(AttemptVisu a, JButton b, int i) {
-        av = a;
-        attempt = b;
-        id = i;
-    }
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == attempt) {
-            //AttemptVisu aV = new AttemptVisu();
-        } 
+        private AttemptVisu att; 
+        private JButton but; 
+        private int ex;
+        
+    public ActionReattemptExercise (AttemptVisu av, JButton button, int idExo) {
+        att = av; 
+        but = button;
+        ex = idExo;
     }
     
+    public void actionPerformed (ActionEvent ae) {
+        if (ae.getSource() == but) {
+            System.out.println("affiche");
+        }
+    }
 }
