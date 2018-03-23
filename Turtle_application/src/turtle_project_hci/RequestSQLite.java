@@ -21,8 +21,8 @@ public class RequestSQLite {
     public void connect() {
         try {
             // db parameters
-            //String url = "jdbc:sqlite:C/sqlite/gui/gp4_Turtleproject.db";
-            String url = "jdbc:sqlite:/Users/manonsacre/sqlite/gui/gp4_Turtleproject.db";
+            String url = "jdbc:sqlite:C:\\sqlite\\gui\\gp4_Turtleproject.db";
+            //String url = "jdbc:sqlite:/Users/manonsacre/sqlite/gui/gp4_Turtleproject.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
 

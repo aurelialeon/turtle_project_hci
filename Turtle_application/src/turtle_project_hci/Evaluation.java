@@ -17,7 +17,7 @@ public class Evaluation {
     private Teacher teacher;
 
     public Evaluation(String commentA) {
-        this.grade = grade.NOT;
+        this.grade = Grade.NOT;
         this.comment = commentA;
     }
 

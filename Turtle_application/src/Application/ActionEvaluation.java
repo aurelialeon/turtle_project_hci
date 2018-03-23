@@ -13,15 +13,15 @@ import javax.swing.JFrame;
  *
  * @author Utilisateur
  */
-public class ActionExPupil extends JFrame implements ActionListener{
-    private ExercicePupil ep;
+public class ActionEvaluation extends JFrame implements ActionListener{
+    private AccueilEvaluation aev;
     
-    public ActionExPupil(ExercicePupil ex){
-        ep = ex;
+    public ActionEvaluation(AccueilEvaluation a){
+        aev = a;
+        
     }
-    public void actionPerformed(ActionEvent e)
-    {
-        ep.press(e);
+    public void actionPerformed(ActionEvent e){
+        aev.press(e);
     }
     
 }

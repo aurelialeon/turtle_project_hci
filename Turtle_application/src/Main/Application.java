@@ -5,6 +5,7 @@
  */
 package Main;
 
+import Application.AccueilEvaluation;
 import Application.CreateExercises;
 import Application.HomePage;
 import Interface.Canvas;
@@ -17,10 +18,12 @@ import java.util.ArrayList;
 import turtle_project_hci.Exercise;
 import turtle_project_hci.RequestSQLite;
 import Interface.TortueCouleur;
+import java.util.ArrayList;
+import turtle_project_hci.Attempt;
+import turtle_project_hci.Exercise;
+import turtle_project_hci.RequestSQLite;
 
-//import java.util.ArrayList;
-//import turtle_project_hci.RequestSQLite;
-//import turtle_project_hci.Exercise;
+
 
 /**
  *
@@ -34,11 +37,15 @@ public class Application{
         //PupilInterface pi = new PupilInterface();
         //CreateExercises ce = new CreateExercises();
         
-        ArrayList<Exercise> p = new ArrayList<>();
+        /**ArrayList<Exercise> p = new ArrayList<>();
         RequestSQLite req = new RequestSQLite();
         p = req.fetchExercisebyClass("CM1");
         for (Exercise ex : p) {
            System.out.println(ex.getNameExercise());
-        }
+        }*/
+        //Exercise ex = new Exercise();
+        //ex.setCodeExercise("MMM");
+        //Attempt att = new Attempt("MMRM");
+        //AccueilEvaluation acEval= new AccueilEvaluation(ex, att);
     }
 }
