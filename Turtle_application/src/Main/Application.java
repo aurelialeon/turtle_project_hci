@@ -5,6 +5,7 @@
  */
 package Main;
 
+import Application.AccueilEvaluation;
 import Application.CreateExercises;
 import Application.HomePage;
 import Interface.Canvas;
@@ -17,11 +18,12 @@ import java.util.ArrayList;
 import turtle_project_hci.Exercise;
 import turtle_project_hci.RequestSQLite;
 import Interface.TortueCouleur;
+import java.util.ArrayList;
 import turtle_project_hci.Attempt;
+import turtle_project_hci.Exercise;
+import turtle_project_hci.RequestSQLite;
 
-//import java.util.ArrayList;
-//import turtle_project_hci.RequestSQLite;
-//import turtle_project_hci.Exercise;
+
 
 /**
  *
@@ -29,23 +31,11 @@ import turtle_project_hci.Attempt;
  */
 public class Application{
     public static void main(String[] args) {
-        HomePage hm = new HomePage("Application");
+        //HomePage hm = new HomePage("Application");
         //TortueRapide t = new TortueRapide();
         //CreateExercise c = new CreateOneExercise(t);
         //PupilInterface pi = new PupilInterface();
         //CreateExercises ce = new CreateExercises();
         
-//        ArrayList<Exercise> p = new ArrayList<>();
-//        RequestSQLite req = new RequestSQLite();
-//        ArrayList<Attempt> att = new ArrayList<>(); 
-//        att = req.fetchAttemptList(1);
-//        for (Attempt at : att) {
-//            System.out.println(at.getExo().getNameExercise());
-//            System.out.println(at.getAnswer());
-//        }
-//        p = req.fetchExercisebyClass("CM1");
-//        for (Exercise ex : p) {
-//           System.out.println(ex.getNameExercise());
-//        }
     }
 }

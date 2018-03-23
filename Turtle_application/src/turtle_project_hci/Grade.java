@@ -12,8 +12,8 @@ package turtle_project_hci;
 public enum Grade {
   //Objets directement construits
   ACQ("Acquired"),
-  COURSE ("In the course of acquisition"),
-  NOT ("Not acquired");
+  PROG("In progress"),
+  NOT("Not acquired");
 
   private String name = "";
    
