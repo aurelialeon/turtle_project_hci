@@ -34,7 +34,7 @@ public class Identification_Teacher extends JPanel{
     private Teacher currentTeacher;
     private IdTeachToMenu controller;
     
-    public Identification_Teacher() {
+    public Identification_Teacher(JFrame hp) {
         
         //this.setTitle("Identification Page");
         

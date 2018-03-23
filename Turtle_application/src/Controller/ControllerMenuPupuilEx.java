@@ -6,10 +6,11 @@
 package Controller;
 
 import Application.AcceuilPupil;
-import Application.ExercicePupil;
+import Application.ExercisePupil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import turtle_project_hci.Exercise;
 
 /**
  *
@@ -18,6 +19,7 @@ import javax.swing.JButton;
 public class ControllerMenuPupuilEx implements ActionListener{
     private AcceuilPupil acceuilpup;
     private JButton exerciceBtn;
+    private Exercise exo;
     
 public ControllerMenuPupuilEx(AcceuilPupil acceuilpup, JButton exerciceBtn ) {
 		acceuilpup = acceuilpup;
@@ -26,7 +28,8 @@ public ControllerMenuPupuilEx(AcceuilPupil acceuilpup, JButton exerciceBtn ) {
     
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == exerciceBtn) {
-            ExercicePupil exoPupil = new ExercicePupil();
+            exo = new Exercise();
+            ExercisePupil exoPupil = new ExercisePupil(exo);
         }
     }
     

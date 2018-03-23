@@ -9,6 +9,7 @@ import Application.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 
 /**
  *
@@ -26,7 +27,7 @@ public class HomePageToIdTeach implements ActionListener{
     
     public void actionPerformed(ActionEvent ae){
         if (ae.getSource() == butt) {
-            hp.setPanel(new Identification_Teacher()); 
+            hp.setPanel(new Identification_Teacher(hp.getHomePage())); 
         }
     }
     

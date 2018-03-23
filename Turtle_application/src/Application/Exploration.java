@@ -34,7 +34,7 @@ public class Exploration extends JFrame implements ActionListener{
         
         this.setTitle("Exploration");
         
-        id = new Identification_Teacher();
+        //id = new Identification_Teacher();
         id.setVisible(false);
         
         don = new Donnees();

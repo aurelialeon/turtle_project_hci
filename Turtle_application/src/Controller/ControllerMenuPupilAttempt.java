@@ -7,7 +7,6 @@ package Controller;
 
 import Application.AcceuilPupil;
 import Application.AttemptVisu;
-import Application.ExercicePupil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;

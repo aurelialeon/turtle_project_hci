@@ -1,4 +1,5 @@
 package Application;
+import Controller.ControllerLogPupil;
 import java.awt.*;
 import java.awt.event.*;
 import java.sql.SQLException;
@@ -11,58 +12,45 @@ import turtle_project_hci.RequestSQLite;
  * 07/03/2018
  * @author Felix
  */
-public final class PupilInterface extends JFrame implements ActionListener{
+public final class PupilInterface extends JPanel {
     //private final JPanel pupilInterface;
     private final JButton enterSubmitBtn;
     private final JTextField pupilLogin;
     private final JLabel satisfyiedSmileyImage;
+    private ControllerLogPupil clp;
     
     public PupilInterface() {
         //---General settings-------
-        this.setTitle("Pupil Interface");
+        //this.setTitle("Pupil Interface");
         this.setSize(1200,800);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+
+        this.setLayout(new BorderLayout());
         
         //---Images----------------
         satisfyiedSmileyImage = new JLabel();
-        //satisfyiedSmileyImage.setIcon(new ImageIcon(PupilInterface.class.getResource("/Images/AccueilPupil.png")));
         satisfyiedSmileyImage.setIcon(new ImageIcon(PupilInterface.class.getResource("/Images/hello.gif")));
         satisfyiedSmileyImage.setPreferredSize(new Dimension(480,370));
         satisfyiedSmileyImage.setEnabled(true);
         satisfyiedSmileyImage.setBackground(Color.WHITE);
-        this.add(satisfyiedSmileyImage, BorderLayout.WEST);
+        this.add(satisfyiedSmileyImage, BorderLayout.CENTER);
 
         //---Button----------------
         enterSubmitBtn = new JButton ("Connection");
         this.add(enterSubmitBtn,BorderLayout.SOUTH);
-        enterSubmitBtn.addActionListener(this);
+        clp = new ControllerLogPupil(this, enterSubmitBtn);
+        enterSubmitBtn.addActionListener(clp);
 
         //---TextField--------------
         pupilLogin = new JTextField();
         this.add(pupilLogin,BorderLayout.NORTH);
         
         //---Settings de fin--------
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(true);
-        this.pack();
         this.setVisible(true);
     }   
-   
-    public void actionPerformed(ActionEvent e){
-        if (e.getSource() == enterSubmitBtn) {
-            String login = pupilLogin.getText();
-            
-            boolean fetchLog;
-            RequestSQLite req = new RequestSQLite();
-            fetchLog = req.fetchLogin(login);
-            
-            if (fetchLog == true){
-                System.out.println(fetchLog);
-                AcceuilPupil acceuilPupil = new AcceuilPupil();
-                this.dispose();
-            }
-        }
-   }
+
+    public JTextField getPupilLogin() {
+        return pupilLogin;
+    }
+    
 }
 

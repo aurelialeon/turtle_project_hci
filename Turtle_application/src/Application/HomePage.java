@@ -33,8 +33,9 @@ public class HomePage extends JFrame {
         
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setResizable(true);
-        this.setSize(3000, 3000);
+        //this.setSize(3000, 3000);
         this.pack();
+        this.setSize(1200,800);
         this.setVisible(true);
     }
    
@@ -58,5 +59,9 @@ public class HomePage extends JFrame {
         globalPanel.add(pup);
         
         return globalPanel;
+    }
+    
+    public JFrame getHomePage(){
+        return this;
     }
 }

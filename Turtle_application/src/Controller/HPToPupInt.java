@@ -28,7 +28,7 @@ public class HPToPupInt implements ActionListener{
     
     public void actionPerformed(ActionEvent ae){
         if (ae.getSource() == butt) {
-            PupilInterface pupIn = new PupilInterface();  
+            hp.setPanel(new PupilInterface());  
         }
     }
     
