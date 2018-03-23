@@ -217,7 +217,7 @@ public class RequestSQLite {
         listAttempt = new ArrayList<Attempt>();
         Exercise newEx; 
         
-        request = "SELECT answerPupil, idExercise, nameEx FROM Attempt INNER JOIN Exercise ON Attempt.idExercise = Exercise.idExercise WHERE Attempt.idPupil = ?";
+        request = "SELECT answerPupil, nameEx, idExercise FROM Attempt INNER JOIN Exercise ON Attempt.idExercise = Exercise.idExercise WHERE Attempt.idPupil = ?";
         
         // connection to the database
         connect();
