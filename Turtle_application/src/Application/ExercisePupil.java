@@ -4,113 +4,48 @@
  * and open the template in the editor.
  */
 package Application;
+
+import Controller.ActionExercisePupil;
 import Interface.TortueCouleur;
 import Interface.TortueG;
 import Interface.TortueRapide;
-import turtle_project_hci.Exercise;
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
 import turtle_project_hci.Attempt;
-import javax.swing.JComboBox;
-import turtle_project_hci.RequestSQLite;
-
-
-
+import turtle_project_hci.Exercise;
 
 /**
- * @author Felix
+ *
+ * @author Utilisateur
  */
-public final class ExercicePupil extends JFrame
-{
-
-    private JButton backward, thisExercise;
+public class ExercisePupil {
+    
+    
     private JLabel text, instruLabel, picLabel, myEmptyLabel;
     private TortueG tortueN, newTurtle;
     private TortueCouleur tortueC;
     private TortueRapide tortueR;
 
-
-    private Exercise myExercise;
-
-    
     private JFrame myFrame, frameOne, frameTwo;
-    private JButton write, unwrite, speedUp, slowDown;
+    private JButton write, unwrite, speedUp, slowDown, backward;
     private JButton forward, back, left, right, move, restart, save, start;
-    
-    private JComboBox combo;
     private JPanel canv, canvToFill, panelArrows, panelButtonsRight, panelRight;
     private String answer = "";
-
+    
+    private Exercise myExercise;
 
 
     
-/**
- * Constructor of ExercicePupil
- */
-    public ExercicePupil () {
-        ActionExPupil ep = new ActionExPupil(this);
-
-        myExercise = new Exercise();
+    public ExercisePupil(Exercise exo){
+        ActionExercisePupil ep = new ActionExercisePupil(this);
         
-        frameOne = new JFrame();
-        frameOne.setTitle("Exercises");
-        frameOne.setSize(1200,800);
-        frameOne.setLocationRelativeTo(null);
-        frameOne.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        Container myContainer = frameOne.getContentPane();
-        myContainer.setLayout(new GridBagLayout());
-        myContainer.setBackground(Color.WHITE);
-        GridBagConstraints gbc = new GridBagConstraints();
-        
-        //---Grid 0, 0 -------------
-        gbc.gridx = 0;
-        gbc.gridy = 0;
-        backward = new JButton("Back");
-        myContainer.add(backward, gbc);
-        backward.addActionListener(ep);
-        
-        //---Grid 0, 3 -------------
-        gbc.gridy = 1;
-        text = new JLabel("Choose an exercise it is time to exercise !");
-
-        frameOne.add(text, gbc);
-
-        // Combo box : menu deroulant avec la liste des exercices
-        gbc.gridy = 2;
-        combo = new JComboBox(); // Creation de la combobox
-
-        combo.setPreferredSize(new Dimension(400, 200));
-
-        ArrayList<Exercise> p = new ArrayList<>();
-        RequestSQLite req = new RequestSQLite();
-        p = req.fetchAllExerciseName();
-        for (Exercise exercise : p) {
-            combo.addItem(exercise.getNameExercise());
-        }
-        frameOne.add(combo,gbc);
-        //combo.addItemListener(new ItemState());
-        for (Exercise exercise : p){
-            if (exercise.getNameExercise()==combo.getSelectedItem()){
-                myExercise = exercise;
-            }
-        }
-        
-        gbc.gridy=4;
-        thisExercise = new JButton("Exercise");
-        frameOne.add(thisExercise, gbc);
-        thisExercise.addActionListener(ep);
-
-        
-        //---Settings de fin--------
-        frameOne.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frameOne.setResizable(true);
-        frameOne.pack();
-        frameOne.setVisible(true); // Setting the frame visible
-        
+        this.myExercise = exo;
         
         tortueN = new TortueG();
         tortueC = new TortueCouleur();
@@ -170,73 +105,8 @@ public final class ExercicePupil extends JFrame
         
     }
     
-    /**
-     * Class interne
-     */
-    class ItemState implements ItemListener {
-        public void itemStateChanged(ItemEvent e) {
-            System.out.println("événement déclenché sur : " + e.getItem());
-    }
-    }
-    /*
-    public void exerciceList () {
-        exo.setListAttempt(ArrayList<Attempt> listAttempt);
-    }*/
-    
-    public void press(ActionEvent e)
-    {
-        if (e.getSource() == backward) {
-            AcceuilPupil acceuilPupil = new AcceuilPupil(); 
-            this.dispose();
-        }
-        
-        if (e.getSource() == thisExercise) {
-            //char lastChar = myExercise.getCodeExercise().charAt(myExercise.getCodeExercise().length() - 1);
-            //for(char c = myExercise.getCodeExercise().charAt(0); c != lastChar; c++){
-            frameOne.dispose();
-            performExercise();
-            myExercise.setCodeExercise("MRMMBUMMW");
-            for (int i = 0 ; i < myExercise.getCodeExercise().length() ;i++){
-                switch (myExercise.getCodeExercise().charAt(i)) {
-                    case 'T':
-                        while (newTurtle.getDirection()!=3){
-                            newTurtle.tourner();
-                        }   break;
-                    case 'L':
-                        while (newTurtle.getDirection()!=2){
-                            newTurtle.tourner();
-                        }   break;
-                    case 'R':
-                        while (newTurtle.getDirection()!=0){
-                            newTurtle.tourner();
-                        }   break;
-                    case 'B':
-                        while (newTurtle.getDirection()!=1){
-                            newTurtle.tourner();
-                        }   break;
-                    case 'U':
-                        newTurtle.tracer(false);
-                        break;
-                    case 'W':
-                        newTurtle.tracer(true);
-                        break;
-                    case 'M':
-                        newTurtle.avancer();
-                        break;
-                    case 'A':
-                        tortueR.accelerer();
-                        break;
-                    case 'F':
-                        tortueR.ralentir();
-                        break;
-                    default:
-                        break;
-                }
-            }
-        }else if (e.getSource() == start){
-            myFrame.dispose();
-            start();
-        }else if (e.getSource() == forward){
+    public void press(ActionEvent e){
+        if (e.getSource() == forward){
             while (newTurtle.getDirection()!=3){
                 newTurtle.tourner();
             }
@@ -281,10 +151,52 @@ public final class ExercicePupil extends JFrame
             Attempt at = new Attempt(answer);
             myExercise.addAttempt(at);
             //ex.setCodeExercise(result);
+        }else if (e.getSource() == start){
+            myFrame.dispose();
         }
-   
-
-        }
+    }
+        
+    public void displayInstruction(){
+        performExercise();
+            myExercise.setCodeExercise("MRMMBUMMW");
+            for (int i = 0 ; i < myExercise.getCodeExercise().length() ;i++){
+                switch (myExercise.getCodeExercise().charAt(i)) {
+                    case 'T':
+                        while (newTurtle.getDirection()!=3){
+                            newTurtle.tourner();
+                        }   break;
+                    case 'L':
+                        while (newTurtle.getDirection()!=2){
+                            newTurtle.tourner();
+                        }   break;
+                    case 'R':
+                        while (newTurtle.getDirection()!=0){
+                            newTurtle.tourner();
+                        }   break;
+                    case 'B':
+                        while (newTurtle.getDirection()!=1){
+                            newTurtle.tourner();
+                        }   break;
+                    case 'U':
+                        newTurtle.tracer(false);
+                        break;
+                    case 'W':
+                        newTurtle.tracer(true);
+                        break;
+                    case 'M':
+                        newTurtle.avancer();
+                        break;
+                    case 'A':
+                        tortueR.accelerer();
+                        break;
+                    case 'F':
+                        tortueR.ralentir();
+                        break;
+                    default:
+                        break;
+                }
+            }
+    }
     
     
     public void performExercise(){

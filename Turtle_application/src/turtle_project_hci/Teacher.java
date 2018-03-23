@@ -16,6 +16,8 @@ public class Teacher extends Person{
     private String password; // password of the account of the teacher
     private ArrayList<Exercise> listExercise; // list of exercises created by the teacher
     private ArrayList<Class> listClass;
+    private int idT;
+    private RequestSQLite req;
     
     /**
      * This is the constructor of the Teacher
@@ -26,6 +28,8 @@ public class Teacher extends Person{
         super(nameTeacher, firstNameTeacher);
         this.listExercise = new ArrayList<>();
         this.listClass = new ArrayList<>();
+        req = new RequestSQLite();
+        idT = 0;
     }
 
     public String getLogin() {
@@ -82,6 +86,10 @@ public class Teacher extends Person{
         this.listClass.add(s);
     }
 
+    public ArrayList<Class> getListClass(int id) {
+        return req.FetchTeacherClass(id);
+    }
+    
     public ArrayList<Class> getListClass() {
         return listClass;
     }
@@ -92,6 +100,14 @@ public class Teacher extends Person{
     
     public String getTName() {
         return super.getName();
+    }
+
+    public int getIdT() {
+        return idT;
+    }
+
+    public void setIdT(int idT) {
+        this.idT = idT;
     }
     
 }

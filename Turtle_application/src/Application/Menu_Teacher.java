@@ -13,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSplitPane;
+import turtle_project_hci.Teacher;
 
 /**
  *
@@ -24,7 +25,7 @@ public class Menu_Teacher extends JFrame implements ActionListener{
     private JPanel menuPanel;
     private JButton createB, modifyB, exploreB, evaluationB, addClassB, addPupB;
 
-    public Menu_Teacher() {
+    public Menu_Teacher(Teacher t) {
         
         
         this.setTitle("Menu Teacher");
@@ -88,13 +89,7 @@ public class Menu_Teacher extends JFrame implements ActionListener{
         } else if (e.getSource() == evaluationB) {
             //Identification_Teacher id = new Identification_Teacher(); 
             this.dispose();
-        } else if (e.getSource() == addClassB) {
-            NewClasse nc = new NewClasse(); 
-            this.dispose();
-        } else if (e.getSource() == addPupB) {
-            NewPupil np = new NewPupil(); 
-            this.dispose();
-        }
+        } 
     }
     
 }

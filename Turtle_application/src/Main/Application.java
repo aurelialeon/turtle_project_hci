@@ -43,9 +43,9 @@ public class Application{
         for (Exercise ex : p) {
            System.out.println(ex.getNameExercise());
         }*/
-//        Exercise ex = new Exercise();
-//        ex.setCodeExercise("MMM");
-//        Attempt att = new Attempt("MMRM");
-//        AccueilEvaluation acEval= new AccueilEvaluation(ex, att);
+        //Exercise ex = new Exercise();
+        //ex.setCodeExercise("MMM");
+        //Attempt att = new Attempt("MMRM");
+        //AccueilEvaluation acEval= new AccueilEvaluation(ex, att);
     }
 }
