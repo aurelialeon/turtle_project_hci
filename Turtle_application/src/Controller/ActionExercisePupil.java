@@ -3,8 +3,9 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package Application;
+package Controller;
 
+import Application.ExercisePupil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
@@ -13,15 +14,15 @@ import javax.swing.JFrame;
  *
  * @author Utilisateur
  */
-public class ActionExPupil extends JFrame implements ActionListener{
-    private ExercicePupil ep;
+public class ActionExercisePupil extends JFrame implements ActionListener{
+    private ExercisePupil aep;
     
-    public ActionExPupil(ExercicePupil ex){
-        ep = ex;
+    public ActionExercisePupil(ExercisePupil a){
+        aep = a;
     }
-    public void actionPerformed(ActionEvent e)
-    {
-        ep.press(e);
+    
+    public void actionPerformed(ActionEvent e){
+        aep.press(e);
     }
     
 }

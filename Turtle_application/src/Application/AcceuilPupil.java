@@ -65,7 +65,7 @@ public class AcceuilPupil extends JFrame implements ActionListener{
     
     public void actionPerformed(ActionEvent e){
         if (e.getSource() == exerciceBtn) {
-            ExercicePupil exoPupil = new ExercicePupil(); 
+            AccueilExPupil exoPupil = new AccueilExPupil(); 
             this.dispose();
         } else if (e.getSource() == attemptVisuBtn) {
             AttemptVisu aV = new AttemptVisu();
