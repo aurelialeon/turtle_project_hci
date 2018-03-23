@@ -21,14 +21,16 @@ import javax.swing.JPanel;
 import turtle_project_hci.Exercise;
 import turtle_project_hci.Attempt;
 import turtle_project_hci.RequestSQLite;
+import Controller.ActionsAttemptVisu;
+
 /**
  *
  * @author Felix
  */
-public class AttemptVisu extends JFrame implements ActionListener{
+public class AttemptVisu extends JFrame {
     private Attempt attemps;
     private Exercise exo; 
-    private JButton backward;
+    private JButton backward,reattempt;
     private int numberOfAttempt;
     private JPanel tableAttempt;
     
@@ -50,7 +52,7 @@ public class AttemptVisu extends JFrame implements ActionListener{
         gbc.gridy = 0;
         backward = new JButton("Back");
         myContainer.add(backward, gbc);
-        backward.addActionListener(this);
+        //backward.addActionListener(this);
         
         //--------------Affichage des essais de l'élève --------------\\
         RequestSQLite req = new RequestSQLite();
@@ -62,7 +64,7 @@ public class AttemptVisu extends JFrame implements ActionListener{
         
         gbc.gridx = 0;
         gbc.gridy = 1;
-        this.add(createAttemptList(a),gbc);
+        this.add(createAttemptList(a,numberOfAttempt),gbc);
         
     
         //---Settings de fin--------
@@ -78,17 +80,22 @@ public class AttemptVisu extends JFrame implements ActionListener{
      * Create the gridLayout containing the list of attempt for a pupil
      * @return tableAttempt
      */
-    private JPanel createAttemptList(ArrayList<Attempt> a) {
+    private JPanel createAttemptList(ArrayList<Attempt> a, int numb) {
+        ActionsAttemptVisu aav = new ActionsAttemptVisu(this);
+        
         tableAttempt = new JPanel();
-        GridLayout table = new GridLayout(2,1);
+        GridLayout table = new GridLayout(numb,1);
         tableAttempt.setLayout(table);
+        
         if (tableAttempt != null) tableAttempt.removeAll();
         
         for (Attempt att : a) {
-            //JLabel nameExercise = new JLabel();
+            JLabel nameExercise = new JLabel(att.getExo().getNameExercise());
             JLabel attemptLabel = new JLabel(att.getAnswer());
-            JButton reattempt = new JButton("Recommencer");
-            reattempt.addActionListener(this);
+            reattempt = new JButton("Recommencer");
+            //reattempt.addActionListener(this);
+            tableAttempt.remove(nameExercise);
+            tableAttempt.add(nameExercise);
             tableAttempt.remove(attemptLabel);
             tableAttempt.add(attemptLabel);
             tableAttempt.remove(reattempt);
@@ -103,10 +110,12 @@ public class AttemptVisu extends JFrame implements ActionListener{
      * Sets the responses for every action listener
      * @param e 
      */
-    public void actionPerformed(ActionEvent e){
+    public void press(ActionEvent e){
         if (e.getSource() == backward) {
             AcceuilPupil acceuil = new AcceuilPupil(); 
             this.dispose();
+        } else if (e.getSource() == reattempt) {
+            System.out.println("^^");
         }
     } 
 }

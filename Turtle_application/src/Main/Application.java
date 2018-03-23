@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import turtle_project_hci.Exercise;
 import turtle_project_hci.RequestSQLite;
 import Interface.TortueCouleur;
+import turtle_project_hci.Attempt;
 
 //import java.util.ArrayList;
 //import turtle_project_hci.RequestSQLite;
@@ -34,11 +35,17 @@ public class Application{
         //PupilInterface pi = new PupilInterface();
         //CreateExercises ce = new CreateExercises();
         
-        ArrayList<Exercise> p = new ArrayList<>();
-        RequestSQLite req = new RequestSQLite();
-        p = req.fetchExercisebyClass("CM1");
-        for (Exercise ex : p) {
-           System.out.println(ex.getNameExercise());
-        }
+//        ArrayList<Exercise> p = new ArrayList<>();
+//        RequestSQLite req = new RequestSQLite();
+//        ArrayList<Attempt> att = new ArrayList<>(); 
+//        att = req.fetchAttemptList(1);
+//        for (Attempt at : att) {
+//            System.out.println(at.getExo().getNameExercise());
+//            System.out.println(at.getAnswer());
+//        }
+//        p = req.fetchExercisebyClass("CM1");
+//        for (Exercise ex : p) {
+//           System.out.println(ex.getNameExercise());
+//        }
     }
 }

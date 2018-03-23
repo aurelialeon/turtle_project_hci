@@ -21,8 +21,8 @@ public class RequestSQLite {
     public void connect() {
         try {
             // db parameters
-            //String url = "jdbc:sqlite:C/sqlite/gui/gp4_Turtleproject.db";
-            String url = "jdbc:sqlite:/Users/manonsacre/sqlite/gui/gp4_Turtleproject.db";
+            String url = "jdbc:sqlite:C:\\sqlite\\gui\\gp4_Turtleproject.db";
+            //String url = "jdbc:sqlite:/Users/manonsacre/sqlite/gui/gp4_Turtleproject.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
 
@@ -215,8 +215,9 @@ public class RequestSQLite {
         Attempt newAttempt;
         ArrayList<Attempt> listAttempt;
         listAttempt = new ArrayList<Attempt>();
+        Exercise newEx; 
         
-        request = "SELECT answerPupil FROM Attempt WHERE idPupil = ?";
+        request = "SELECT answerPupil, idExercise, nameEx FROM Attempt INNER JOIN Exercise ON Attempt.idExercise = Exercise.idExercise WHERE Attempt.idPupil = ?";
         
         // connection to the database
         connect();
@@ -230,6 +231,10 @@ public class RequestSQLite {
             while(rs.next()){
                 newAttempt = new Attempt(null);
                 newAttempt.setAnswer(rs.getString("answerPupil"));
+                newEx = new Exercise();
+                newAttempt.setExo(newEx);
+                newEx.setIdEx(rs.getInt("idExercise"));
+                newEx.setNameExercise(rs.getString("nameEx"));
                 listAttempt.add(newAttempt);
             }
         } catch (SQLException e) {
@@ -239,42 +244,7 @@ public class RequestSQLite {
         }
         return (listAttempt);
     }
-        /**
-         * Takes the id of the Pupil and his answer to get the id of the exercise
-         * @param idPupil
-         * @param answerPupil
-         * @return listExoId
-         */
-        public int fetchExId (int idPupil, String answerPupil) {
-        // Declaration of the variables
-        PreparedStatement pstmt = null;
-        ResultSet rs = null;
-        String request;
-        int exId = 0;
-        
-        request = "SELECT idExercise FROM Attempt WHERE idPupil = ? AND answerPupil = ?";
-        
-        // connection to the database
-        connect();
-
-        try {
-            pstmt = conn.prepareStatement(request); // Creation of a statement
-            pstmt.setInt(1, idPupil); // add the varaible into the sql request
-            pstmt.setString(2, answerPupil);
-            
-            rs = pstmt.executeQuery(); // Execution of the query
-
-            while(rs.next()){
-                exId = rs.getInt("idExercise");
-            }
-        } catch (SQLException e) {
-            System.out.println(e.getMessage());
-        } finally {
-            deconnect();
-        }
-        return (exId);
-    }
-    
+   
          /**
          * Takes the id of the exercise to get the name of the exercise
          * @param idExercise
