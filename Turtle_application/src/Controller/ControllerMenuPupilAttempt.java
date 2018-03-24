@@ -7,9 +7,11 @@ package Controller;
 
 import Application.AcceuilPupil;
 import Application.AttemptVisu;
+import Application.HomePage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
+
 
 /**
  *
@@ -17,6 +19,7 @@ import javax.swing.JButton;
  */
 public class ControllerMenuPupilAttempt implements ActionListener{
         private AcceuilPupil acceuilpup;
+        private HomePage hp;
         private JButton attemptVisuBtn;
     
 public ControllerMenuPupilAttempt (AcceuilPupil acceuilpup, JButton attemptVisuBtn ) {
@@ -26,7 +29,8 @@ public ControllerMenuPupilAttempt (AcceuilPupil acceuilpup, JButton attemptVisuB
     
     public void actionPerformed(ActionEvent e) {
             if (e.getSource() == attemptVisuBtn) {
-            AttemptVisu aV = new AttemptVisu();
-        }
+                hp = new HomePage();
+                hp.setPanel(new AttemptVisu());  
+            }
     }
 }

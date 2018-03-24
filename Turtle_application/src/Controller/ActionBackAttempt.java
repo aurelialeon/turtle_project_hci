@@ -1,6 +1,8 @@
 package Controller;
 
+import Application.AcceuilPupil;
 import Application.AttemptVisu;
+import Application.HomePage;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
@@ -12,6 +14,7 @@ import javax.swing.JButton;
 public class ActionBackAttempt implements ActionListener {
     private AttemptVisu att; 
     private JButton but;
+    private HomePage hp;
     
     public ActionBackAttempt (AttemptVisu av, JButton button) {
         att = av; 
@@ -20,7 +23,8 @@ public class ActionBackAttempt implements ActionListener {
     
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == but) {
-            // Revenir à la page précédente
+            hp = new HomePage(); 
+            hp.setPanel(new AcceuilPupil());
         }
     }
 }

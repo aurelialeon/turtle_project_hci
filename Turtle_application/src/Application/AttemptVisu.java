@@ -9,16 +9,14 @@ import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import javax.swing.JPanel;
+import javax.swing.*;
 import turtle_project_hci.Exercise;
 import turtle_project_hci.Attempt;
 import turtle_project_hci.RequestSQLite;
@@ -43,6 +41,7 @@ public class AttemptVisu extends JPanel {
                
         backward = new JButton("Back");
         this.add(backward, BorderLayout.NORTH);
+        backward.setFont(new Font("Serif", Font.PLAIN, 28));
         //backward.addActionListener(aav);
         
         //--------------Affichage des essais de l'élève --------------\\
@@ -53,8 +52,7 @@ public class AttemptVisu extends JPanel {
         ArrayList<Attempt> a = new ArrayList<>();
         a = req2.fetchAttemptList(1); // on récupère la liste des essais pour l'élève dont l'id correspond
         
-        this.add(new JLabel("Your attempts :"),BorderLayout.CENTER);
-        this.add(createAttemptList(a,numberOfAttempt),BorderLayout.SOUTH);
+        this.add(createAttemptList(a,numberOfAttempt),BorderLayout.CENTER);
            
         //---Settings de fin--------
         this.setVisible(true); // Setting the frame visible   
@@ -71,15 +69,20 @@ public class AttemptVisu extends JPanel {
         tableAttempt = new JPanel();
         GridLayout table = new GridLayout(numb,1);
         tableAttempt.setLayout(table);
-
+        RequestSQLite req = new RequestSQLite();
+        JLabel nameExercise; 
+        JLabel attemptLabel;
          
         if (tableAttempt != null) tableAttempt.removeAll();
             
         for (Attempt att : a) {
-            JLabel nameExercise = new JLabel(att.getExo().getNameExercise());
-            JLabel attemptLabel = new JLabel(att.getAnswer());
-            idexo = att.getExo().getIdEx();
+            nameExercise = new JLabel(att.getExo().getNameExercise(), SwingConstants.CENTER);
+            nameExercise.setFont(new Font("Serif", Font.PLAIN, 28));
+            attemptLabel = new JLabel(att.getAnswer(), SwingConstants.CENTER);
+            attemptLabel.setFont(new Font("Serif", Font.PLAIN, 26));
+            idexo = req.fetchAttemptExId(att.getExo().getNameExercise());
             reattempt = new JButton("Start again");
+            reattempt.setFont(new Font("Serif", Font.PLAIN, 26));
             are = new ActionReattemptExercise(this, reattempt, idexo); // Ici il faut récupérer l'objet exo à partir de la commande sql
             
             tableAttempt.remove(nameExercise);
@@ -93,4 +96,5 @@ public class AttemptVisu extends JPanel {
         }
         return(tableAttempt);   
     }
+     
 }
