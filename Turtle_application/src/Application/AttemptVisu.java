@@ -4,6 +4,7 @@
  * and open the template in the editor.
  */
 package Application;
+import Controller.ActionBackAttempt;
 import Controller.ActionReattemptExercise;
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -34,8 +35,7 @@ public class AttemptVisu extends JPanel {
     private JFrame frameAtt;
     
     public AttemptVisu (JFrame att) {
-        //ActionsAttemptVisu aav = new ActionsAttemptVisu(this);        
-        
+                
         frameAtt = att;
         
         //---General settings-------
@@ -45,7 +45,8 @@ public class AttemptVisu extends JPanel {
         backward = new JButton("Back");
         this.add(backward, BorderLayout.NORTH);
         backward.setFont(new Font("Serif", Font.PLAIN, 28));
-        //backward.addActionListener(aav);
+        ActionBackAttempt aav = new ActionBackAttempt(this, backward);
+        backward.addActionListener(aav);
         
         //--------------Affichage des essais de l'élève --------------\\
         RequestSQLite req = new RequestSQLite();

@@ -17,18 +17,19 @@ import turtle_project_hci.Exercise;
  * @author Julie
  */
 public class ControllerMenuPupuilEx implements ActionListener{
-    private AcceuilPupil acceuilpup;
-    private JButton exerciceBtn;
+    private AcceuilPupil acceuilpupil;
+    private JButton exerciseBtn;
     private Exercise exo;
     
 public ControllerMenuPupuilEx(AcceuilPupil acceuilpup, JButton exerciceBtn ) {
-		acceuilpup = acceuilpup;
-                exerciceBtn = exerciceBtn;
+		acceuilpupil = acceuilpup;
+                exerciseBtn = exerciceBtn;
 	}
     
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource() == exerciceBtn) {
+        if (e.getSource() == exerciseBtn) {
             exo = new Exercise();
+            acceuilpupil.setPanel(new ExercisePupil(exo), acceuilpupil.getJfra());
             ExercisePupil exoPupil = new ExercisePupil(exo);
         }
     }

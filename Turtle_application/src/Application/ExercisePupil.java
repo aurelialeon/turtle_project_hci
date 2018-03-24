@@ -24,7 +24,7 @@ import turtle_project_hci.Exercise;
  *
  * @author Utilisateur
  */
-public class ExercisePupil {
+public class ExercisePupil extends JPanel{
     
     
     private JLabel text, instruLabel, picLabel, myEmptyLabel;
