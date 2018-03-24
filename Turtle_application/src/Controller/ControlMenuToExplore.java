@@ -27,8 +27,9 @@ public class ControlMenuToExplore implements ActionListener{
     public ControlMenuToExplore (Menu_Teacher av, JButton button) {
         mt = av; 
         but = button;
-        racine = new DefaultMutableTreeNode((don.getTeach1().getFName() + " " + don.getTeach1().getTName()));
         don = new Donnees();
+        racine = new DefaultMutableTreeNode((don.getTeach1().getFName() + " " + don.getTeach1().getTName()));
+        
     }
     
     public void actionPerformed(ActionEvent ae) {
