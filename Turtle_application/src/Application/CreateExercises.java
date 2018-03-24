@@ -28,7 +28,7 @@ import turtle_project_hci.Exercise;
  *
  * @author Julie
  */
-public class CreateExercises extends JFrame 
+public class CreateExercises extends JPanel 
 {
     private JLabel titre, nameEx,instruction; 
     //Fields that teachers fill out for exercise name and instructions
@@ -60,10 +60,14 @@ public class CreateExercises extends JFrame
     private JComboBox comboSpeed;
     private JRadioButton check1Bis, check2Bis, check3Bis, check4Bis, check5Bis;
             
+    private JFrame controlFrame;
 /**
  * Constructor of CreateExerciseClass
  */
-    public CreateExercises() {
+    public CreateExercises(JFrame fra) {
+        
+        controlFrame = fra;
+        
         ActionsCreationExercise p = new ActionsCreationExercise(this);
         myExercise = new Exercise();
         
@@ -371,6 +375,16 @@ public class CreateExercises extends JFrame
         this.result = result;
     }
         
-    
+    public void setPanel(JPanel panel, JFrame frame) {
+        frame.setContentPane(panel);
+        frame.revalidate();
+        frame.pack();
+        frame.setSize(1200,800);
+        //myFrame.setVisible(true);
+    }
+
+    public JFrame getControlFrame() {
+        return controlFrame;
+    }
      
 }

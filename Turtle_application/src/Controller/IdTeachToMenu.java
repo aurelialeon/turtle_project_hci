@@ -39,7 +39,7 @@ public class IdTeachToMenu implements ActionListener{
             currentTeacher = req.fetchTeacher(login, pwd);
             
             if (authentificationTeacher == true) {
-                Menu_Teacher menu = new Menu_Teacher(currentTeacher); 
+                id.setPanel(new Menu_Teacher(currentTeacher, id.getJf()), id.getJf()); 
             }
            
         }

@@ -16,32 +16,34 @@ import javax.swing.JPanel;
  *
  * @author manonsacre
  */
-public class HomePage extends JFrame {
+public class HomePage {
     
     private JButton pup, teach;
     private HomePageToIdTeach a;
     private HPToPupInt cd;
     private JPanel globalPanel;
+    private JFrame myFrame;
 
     public HomePage() {
         
-        this.setTitle("Application");
+        myFrame = new JFrame();
+        myFrame.setTitle("Application");
         
-        this.setLayout(new BorderLayout());
+        myFrame.setLayout(new BorderLayout());
         //this.add(globalPanel, BorderLayout.CENTER);
-        this.setPanel(getGlobalPan());
+        setPanel(getGlobalPan(), myFrame);
         
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(true);
+        myFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        myFrame.setResizable(true);
         //this.setSize(3000, 3000);
-        this.pack();
-        this.setSize(1200,800);
-        this.setVisible(true);
     }
    
-    public void setPanel(JPanel panel) {
-        this.setContentPane(panel);
-        this.revalidate();
+    public void setPanel(JPanel panel, JFrame frame) {
+        frame.setContentPane(panel);
+        frame.revalidate();
+        frame.pack();
+        frame.setSize(1200,800);
+        //myFrame.setVisible(true);
     }
     
     public JPanel getGlobalPan(){
@@ -62,6 +64,6 @@ public class HomePage extends JFrame {
     }
     
     public JFrame getHomePage(){
-        return this;
+        return myFrame;
     }
 }

@@ -26,7 +26,6 @@ public class ControllerLogPupil implements ActionListener{
     public ControllerLogPupil(PupilInterface acc, JButton b) {
         pi = acc;
         butt = b;
-        //hp = new HomePage();
     }
     
     public void actionPerformed(ActionEvent e){
@@ -39,8 +38,7 @@ public class ControllerLogPupil implements ActionListener{
             
             if (fetchLog == true){
                 System.out.println(fetchLog);
-                hp = new HomePage();
-                hp.setPanel(new AcceuilPupil());
+                pi.setPanel(new AcceuilPupil(pi.getJfp()), pi.getJfp());
             }
         }
    }

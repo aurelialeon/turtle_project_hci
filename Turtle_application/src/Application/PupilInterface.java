@@ -18,10 +18,13 @@ public final class PupilInterface extends JPanel {
     private final JTextField pupilLogin;
     private final JLabel satisfyiedSmileyImage;
     private ControllerLogPupil clp;
+    private JFrame jfp;
     
-    public PupilInterface() {
+    public PupilInterface(JFrame hp) {
         //---General settings-------
         //this.setTitle("Pupil Interface");
+        jfp = hp;
+        
         this.setSize(1200,800);
 
         this.setLayout(new BorderLayout());
@@ -51,6 +54,17 @@ public final class PupilInterface extends JPanel {
     public JTextField getPupilLogin() {
         return pupilLogin;
     }
+
+    public JFrame getJfp() {
+        return jfp;
+    }
     
+    public void setPanel(JPanel panel, JFrame frame) {
+        frame.setContentPane(panel);
+        frame.revalidate();
+        frame.pack();
+        frame.setSize(1200,800);
+        //myFrame.setVisible(true);
+    }
 }
 

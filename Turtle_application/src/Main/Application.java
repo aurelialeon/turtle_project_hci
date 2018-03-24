@@ -32,10 +32,10 @@ import turtle_project_hci.RequestSQLite;
  */
 public class Application{
     
-    private HomePage hm;
     
     public static void main(String[] args) {
         HomePage hm = new HomePage();
+        hm.getHomePage().setVisible(true);
         //TortueRapide t = new TortueRapide();
         //CreateExercise c = new CreateOneExercise(t);
         //PupilInterface pi = new PupilInterface();
@@ -51,9 +51,5 @@ public class Application{
         //ex.setCodeExercise("MMM");
         //Attempt att = new Attempt("MMRM");
         //AccueilEvaluation acEval= new AccueilEvaluation(ex, att);
-    }
-    
-    public JFrame getHp() {
-        return hm.getHomePage();
     }
 }

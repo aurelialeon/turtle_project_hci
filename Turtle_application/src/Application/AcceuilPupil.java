@@ -27,11 +27,15 @@ public class AcceuilPupil extends JPanel{
     private ControllerMenuPupuilEx controlE;
     private ControllerMenuPupilResult controlR;
     private ControllerMenuPupilAttempt controlA;
+    private JFrame jfra;
     
-    public AcceuilPupil() {
+    public AcceuilPupil(JFrame fra) {
         
         //---General settings-------
         //this.setTitle("Tableau de bord");
+        
+        jfra = fra;
+        
         this.setPreferredSize(new Dimension(400, 200));
         
         //Container this = this.getContentPane();
@@ -66,4 +70,17 @@ public class AcceuilPupil extends JPanel{
         //---Setting de fin-----------------------------------------------------
         this.setVisible(true); // Setting the frame visible
     }
+    
+    public void setPanel(JPanel panel, JFrame frame) {
+        frame.setContentPane(panel);
+        frame.revalidate();
+        frame.pack();
+        frame.setSize(1200,800);
+        //myFrame.setVisible(true);
+    }
+
+    public JFrame getJfra() {
+        return jfra;
+    }
+    
 }

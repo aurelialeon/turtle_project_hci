@@ -31,9 +31,12 @@ public class AttemptVisu extends JPanel {
     private JButton backward,reattempt;
     private int numberOfAttempt;
     private JPanel tableAttempt;
+    private JFrame frameAtt;
     
-    public AttemptVisu () {
+    public AttemptVisu (JFrame att) {
         //ActionsAttemptVisu aav = new ActionsAttemptVisu(this);        
+        
+        frameAtt = att;
         
         //---General settings-------
         this.setPreferredSize(new Dimension(400, 200));
@@ -84,6 +87,7 @@ public class AttemptVisu extends JPanel {
             reattempt = new JButton("Start again");
             reattempt.setFont(new Font("Serif", Font.PLAIN, 26));
             are = new ActionReattemptExercise(this, reattempt, idexo); // Ici il faut récupérer l'objet exo à partir de la commande sql
+            reattempt.addActionListener(are);
             
             tableAttempt.remove(nameExercise);
             tableAttempt.add(nameExercise);
@@ -96,5 +100,17 @@ public class AttemptVisu extends JPanel {
         }
         return(tableAttempt);   
     }
-     
+    
+    public void setPanel(JPanel panel, JFrame frame) {
+        frame.setContentPane(panel);
+        frame.revalidate();
+        frame.pack();
+        frame.setSize(1200,800);
+        //myFrame.setVisible(true);
+    }
+
+    public JFrame getFrameAtt() {
+        return frameAtt;
+    }
+    
 }

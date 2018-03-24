@@ -5,12 +5,18 @@
  */
 package Application;
 
+import Controller.ControlExploreItemToCreateEx;
+import Controller.ControlExploreItemToEval;
+import Controller.ControlExploreItemToExplore;
+import Controller.ControlExploreItemToMenu;
+import Controller.ControlExploreItemToModif;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
+import javax.swing.JPanel;
 import javax.swing.JTree;
 import javax.swing.tree.DefaultMutableTreeNode;
 import javax.swing.tree.TreeSelectionModel;
@@ -22,17 +28,20 @@ import turtle_project_hci.Pupil;
  *
  * @author manonsacre
  */
-public class Exploration extends JFrame implements ActionListener{
+public class Exploration extends JPanel{
 
-    private JMenuItem createI, modifyI, exploreI, evaluationI, addClassI, addPupI, backMenu; 
+    private JMenuItem createI, modifyI, exploreI, evaluationI, backMenu; 
     private Donnees don;
     private JTree tree;
     private DefaultMutableTreeNode top;
     private Identification_Teacher id;
+    private JFrame exploreFrame;
     
-    public Exploration() {
+    public Exploration(JFrame fra) {
         
-        this.setTitle("Exploration");
+        exploreFrame = fra;
+        
+        //this.setTitle("Exploration");
         
         //id = new Identification_Teacher();
         id.setVisible(false);
@@ -58,8 +67,6 @@ public class Exploration extends JFrame implements ActionListener{
         modifyI = new JMenuItem("Modify exercice");
         exploreI = new JMenuItem("Explore Class");
         evaluationI = new JMenuItem("Evaluation");
-        addClassI = new JMenuItem("New Class");
-        addPupI = new JMenuItem("New Pupil");
         backMenu = new JMenuItem("Back to the menu");
         
         // Add the items to the menu 
@@ -67,34 +74,33 @@ public class Exploration extends JFrame implements ActionListener{
         menu.add(modifyI);
         menu.add(exploreI);
         menu.add(evaluationI);
-        menu.add(addClassI);
-        menu.add(addPupI);
         menu.add(backMenu);
         
         // Add our menu to the menubar
         menuBar.add(menu);
         
         // Display the menubar in the frame
-        this.setJMenuBar(menuBar);
+        exploreFrame.setJMenuBar(menuBar);
         
-        createI.addActionListener(this);
-        modifyI.addActionListener(this);
-        exploreI.addActionListener(this);
-        evaluationI.addActionListener(this);
-        addClassI.addActionListener(this);
-        addPupI.addActionListener(this);
-        backMenu.addActionListener(this);
+        ControlExploreItemToCreateEx ceitce = new ControlExploreItemToCreateEx(this, createI);
+        createI.addActionListener(ceitce);
+        ControlExploreItemToModif ceitm = new ControlExploreItemToModif(this, modifyI);
+        modifyI.addActionListener(ceitm);
+        ControlExploreItemToExplore ceite = new ControlExploreItemToExplore(this, exploreI);
+        exploreI.addActionListener(ceite);
+        ControlExploreItemToEval ceitev = new ControlExploreItemToEval(this, evaluationI);
+        evaluationI.addActionListener(ceitev);
+        ControlExploreItemToMenu ceitmenu = new ControlExploreItemToMenu(this, backMenu);
+        backMenu.addActionListener(ceitmenu);
         
         this.add(tree);
         
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(true);
         this.setSize(3000, 3000);
-        this.pack();
         this.setVisible(true);
         
     }
     
+    /*
     public void actionPerformed(ActionEvent e)//rend le bouton actif
     {
         if (e.getSource() == createI) {
@@ -114,6 +120,7 @@ public class Exploration extends JFrame implements ActionListener{
             this.dispose();
         }
     }
+*/
     
     public void createTree() {
         //for (Class classe : id.getCurrentTeacher().getListClass(id.getCurrentTeacher())) {
@@ -127,5 +134,17 @@ public class Exploration extends JFrame implements ActionListener{
             }
             top.add(laClasse);
         }
+    }
+    
+    public void setPanel(JPanel panel, JFrame frame) {
+        frame.setContentPane(panel);
+        frame.revalidate();
+        frame.pack();
+        frame.setSize(1200,800);
+        //myFrame.setVisible(true);
+    }
+
+    public JFrame getExploreFrame() {
+        return exploreFrame;
     }
 }

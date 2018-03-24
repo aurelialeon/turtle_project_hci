@@ -5,24 +5,30 @@
  */
 package Controller;
 
+import Application.AcceuilPupil;
 import Application.AccueilExPupil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JButton;
 import javax.swing.JFrame;
 
 /**
  *
  * @author Utilisateur
  */
-public class ActionAccueilExPupil extends JFrame implements ActionListener{
+public class ActionAccueilExPupil implements ActionListener{
     private AccueilExPupil ep;
+    private JButton but;
     
-    public ActionAccueilExPupil(AccueilExPupil ex){
-        ep = ex;
+    public ActionAccueilExPupil (AccueilExPupil av, JButton button) {
+        ep = av; 
+        but = button;
     }
-    public void actionPerformed(ActionEvent e)
-    {
-        ep.press(e);
+    
+    public void actionPerformed(ActionEvent ae) {
+        if (ae.getSource() == but) { 
+            ep.setPanel(new AcceuilPupil(ep.getFrameAEP()), ep.getFrameAEP());
+        }
     }
     
 }

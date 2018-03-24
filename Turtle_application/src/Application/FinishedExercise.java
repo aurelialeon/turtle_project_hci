@@ -5,6 +5,8 @@
  */
 package Application;
 
+import Controller.FinishedExToAccPupil;
+import Controller.FinishedExToAttemptAnEx;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
@@ -13,57 +15,60 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Felix
  */
-public class FinishedExercise extends JFrame implements ActionListener{
+public class FinishedExercise extends JPanel {
     private JButton retry, goToMainPage;
+    private JFrame frameFinished;
     
-    public FinishedExercise () {
-                //---General settings-------
-        this.setTitle("Exercise list");
+    public FinishedExercise (JFrame fra) {
+        //---General settings-------
+        
+        frameFinished = fra;
+                
+        //this.setTitle("Exercise list");
         this.setSize(1200,800);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         
         
-        Container myContainer = this.getContentPane();
-        myContainer.setLayout(new GridBagLayout());
-        myContainer.setBackground(Color.WHITE);
+        this.setLayout(new GridBagLayout());
+        this.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         
         //---Grid 0, 0 -------------
         gbc.gridx = 0;
         gbc.gridy = 0;
         retry = new JButton("Retry");
-        myContainer.add(retry, gbc);
-        retry.addActionListener(this);
+        this.add(retry, gbc);
+        FinishedExToAttemptAnEx fetaae = new FinishedExToAttemptAnEx(this, retry);
+        retry.addActionListener(fetaae);
         
         //---Grid O, 1 -------------
         gbc.gridy = 1;
         goToMainPage = new JButton("Submit and go to main page");
-        myContainer.add(goToMainPage, gbc);
-        goToMainPage.addActionListener(this);
+        this.add(goToMainPage, gbc);
+        FinishedExToAccPupil fetap = new FinishedExToAccPupil(this, goToMainPage);
+        goToMainPage.addActionListener(fetap);
         
         //---Settings de fin--------
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(true);
-        this.pack();
         this.setVisible(true); // Setting the frame visible 
     }
     
-    public void actionPerformed(ActionEvent e)
-    {
-        if (e.getSource() == retry) {
-            AttemptAnExercise retry = new AttemptAnExercise(); 
-            this.dispose();
-        } else if (e.getSource() == goToMainPage) {
-            AcceuilPupil acceuilPupil = new AcceuilPupil(); 
-            this.dispose();
-        }
+    public void setPanel(JPanel panel, JFrame frame) {
+        frame.setContentPane(panel);
+        frame.revalidate();
+        frame.pack();
+        frame.setSize(1200,800);
+        //myFrame.setVisible(true);
     }
+
+    public JFrame getFrameFinished() {
+        return frameFinished;
+    }
+    
 }
     
 

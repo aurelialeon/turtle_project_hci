@@ -5,6 +5,10 @@
  */
 package Application;
 
+import Controller.ControlMenuToEvalAcc;
+import Controller.ControlMenuToExplore;
+import Controller.ControlMenuToModif;
+import Controller.ControllerMenuToCreateExercises;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -19,43 +23,43 @@ import turtle_project_hci.Teacher;
  *
  * @author manonsacre
  */
-public class Menu_Teacher extends JFrame implements ActionListener{
+public class Menu_Teacher extends JPanel {
     
     private JSplitPane split;
     private JPanel menuPanel;
-    private JButton createB, modifyB, exploreB, evaluationB, addClassB, addPupB;
+    private JButton createB, modifyB, exploreB, evaluationB;
+    private JFrame menuFrame;
 
-    public Menu_Teacher(Teacher t) {
+    public Menu_Teacher(Teacher t, JFrame fra) {
         
+        menuFrame = fra;
         
-        this.setTitle("Menu Teacher");
+        //this.setTitle("Menu Teacher");
         
         split = new JSplitPane();
         split.setOneTouchExpandable(true);
         split.setContinuousLayout(true);
-        getContentPane().add(split);
+        this.add(split);
         
         createB = new JButton("◊ Create exercice");
-        createB.addActionListener(this);
+        ControllerMenuToCreateExercises cmtce = new ControllerMenuToCreateExercises(this, createB);
+        createB.addActionListener(cmtce);
         
         modifyB = new JButton("◊ Modify exercice");
-        modifyB.addActionListener(this);
+        ControlMenuToModif cmtm = new ControlMenuToModif(this, modifyB);
+        modifyB.addActionListener(cmtm);
         
         exploreB = new JButton("◊ Explore class");
-        exploreB.addActionListener(this);
+        ControlMenuToExplore cmte = new ControlMenuToExplore(this, exploreB);
+        exploreB.addActionListener(cmte);
         
         evaluationB = new JButton("◊ Evaluation");
-        evaluationB.addActionListener(this);
-        
-        addClassB = new JButton("◊ Add a new Class");
-        addClassB.addActionListener(this);
-        
-        addPupB = new JButton("◊ Add a new Pupil");
-        addPupB.addActionListener(this);
+        ControlMenuToEvalAcc cmtea = new ControlMenuToEvalAcc(this, evaluationB);
+        evaluationB.addActionListener(cmtea);
         
         JScrollPane scrollPane = new JScrollPane();
         menuPanel = new JPanel();
-        menuPanel.setLayout(new GridLayout(6, 1));
+        menuPanel.setLayout(new GridLayout(4, 1));
         //scrollPane.setViewportView(tree);
         split.setLeftComponent(menuPanel);
         split.setRightComponent(scrollPane);
@@ -64,32 +68,20 @@ public class Menu_Teacher extends JFrame implements ActionListener{
         menuPanel.add(modifyB);
         menuPanel.add(exploreB);
         menuPanel.add(evaluationB);
-        menuPanel.add(addClassB);
-        menuPanel.add(addPupB);
         
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(true);
         this.setSize(3000, 3000);
-        this.pack();
         this.setVisible(true);
     }
     
-    public void actionPerformed(ActionEvent e)//rend le bouton actif
-    {
-        if (e.getSource() == createB) {
-            CreateExercises ce = new CreateExercises();
-            this.dispose();
-        } else if (e.getSource() == modifyB) {
-            //Identification_Teacher id = new Identification_Teacher(); 
-            this.dispose();
-        } else if (e.getSource() == exploreB) {
-            Exploration ex = new Exploration();
-            ex.createTree();
-            this.dispose();
-        } else if (e.getSource() == evaluationB) {
-            //Identification_Teacher id = new Identification_Teacher(); 
-            this.dispose();
-        } 
+    public void setPanel(JPanel panel, JFrame frame) {
+        frame.setContentPane(panel);
+        frame.revalidate();
+        frame.pack();
+        frame.setSize(1200,800);
+        //myFrame.setVisible(true);
     }
-    
+
+    public JFrame getMenuFrame() {
+        return menuFrame;
+    }
 }

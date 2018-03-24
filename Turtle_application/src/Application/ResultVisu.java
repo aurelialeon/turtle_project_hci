@@ -5,6 +5,7 @@
  */
 package Application;
 
+import Controller.ResultVisuBackAccueil;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.GridBagConstraints;
@@ -13,46 +14,50 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JPanel;
 
 /**
  *
  * @author Felix
  */
-public class ResultVisu extends JFrame implements ActionListener{
+public class ResultVisu extends JPanel {
 
     private JButton backward;
+    private JFrame resultFrame;
     
-    public ResultVisu (){
+    public ResultVisu (JFrame fra){
         //---General settings-------
-        this.setTitle("Results visualisation");
-        this.setSize(1200,800);
-        this.setLocationRelativeTo(null);
-        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        resultFrame = fra;
         
-        Container myContainer = this.getContentPane();
-        myContainer.setLayout(new GridBagLayout());
-        myContainer.setBackground(Color.WHITE);
+        //this.setTitle("Results visualisation");
+        this.setSize(1200,800);
+        
+        this.setLayout(new GridBagLayout());
+        this.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         
         //---Grid 0, 0 -------------
         gbc.gridx = 0;
         gbc.gridy = 0;
         backward = new JButton("Back");
-        myContainer.add(backward, gbc);
-        backward.addActionListener(this);
+        ResultVisuBackAccueil rvba = new ResultVisuBackAccueil(this, backward);
+        this.add(backward, gbc);
+        backward.addActionListener(rvba);
         
         //---Settings de fin--------
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setResizable(true);
-        this.pack();
         this.setVisible(true); // Setting the frame visible
     }
     
-    public void actionPerformed(ActionEvent e)
-    {
-        if (e.getSource() == backward) {
-            AcceuilPupil acceuilPupil = new AcceuilPupil(); 
-            this.dispose();
-        }
+    public void setPanel(JPanel panel, JFrame frame) {
+        frame.setContentPane(panel);
+        frame.revalidate();
+        frame.pack();
+        frame.setSize(1200,800);
+        //myFrame.setVisible(true);
     }
+
+    public JFrame getResultFrame() {
+        return resultFrame;
+    }
+    
 }

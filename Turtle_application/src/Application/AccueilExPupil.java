@@ -31,7 +31,7 @@ public final class AccueilExPupil extends JFrame
 
     private JButton backward, thisExercise;
     private JLabel text;
-    private JFrame frameOne;
+    private JFrame frameOne, frameAEP;
     
     private JComboBox combo;
 
@@ -42,9 +42,10 @@ public final class AccueilExPupil extends JFrame
 /**
  * Constructor of ExercicePupil
  */
-    public AccueilExPupil () {
-        ActionAccueilExPupil ep = new ActionAccueilExPupil(this);
+    public AccueilExPupil (JFrame frame) {
 
+        frameAEP = frame;
+        
         //myExercise = new Exercise();
         
         frameOne = new JFrame();
@@ -62,6 +63,7 @@ public final class AccueilExPupil extends JFrame
         gbc.gridx = 0;
         gbc.gridy = 0;
         backward = new JButton("Back");
+        ActionAccueilExPupil ep = new ActionAccueilExPupil(this, backward);
         myContainer.add(backward, gbc);
         backward.addActionListener(ep);
         
@@ -122,11 +124,7 @@ public final class AccueilExPupil extends JFrame
     
     public void press(ActionEvent e)
     {
-        if (e.getSource() == backward) {
-            AcceuilPupil acceuilPupil = new AcceuilPupil(); 
-            this.dispose();
-
-        }else if (e.getSource() == thisExercise){
+        if (e.getSource() == thisExercise){
             frameOne.dispose();
             ExercisePupil aep = new ExercisePupil(myExercise);
 
@@ -134,7 +132,17 @@ public final class AccueilExPupil extends JFrame
    
 
     }
+
+    public JFrame getFrameAEP() {
+        return frameAEP;
+    }
     
-   
+   public void setPanel(JPanel panel, JFrame frame) {
+        frame.setContentPane(panel);
+        frame.revalidate();
+        frame.pack();
+        frame.setSize(1200,800);
+        //myFrame.setVisible(true);
+    }
     
 }

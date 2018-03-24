@@ -33,9 +33,11 @@ public class Identification_Teacher extends JPanel{
     private JButton go;
     private Teacher currentTeacher;
     private IdTeachToMenu controller;
+    private JFrame jf;
     
     public Identification_Teacher(JFrame hp) {
         
+        jf = hp;
         //this.setTitle("Identification Page");
         
         identif = new JPanel();
@@ -97,5 +99,16 @@ public class Identification_Teacher extends JPanel{
     public Teacher getCurrentTeacher() {
         return currentTeacher;
     }
+
+    public JFrame getJf() {
+        return jf;
+    }
     
+    public void setPanel(JPanel panel, JFrame frame) {
+        frame.setContentPane(panel);
+        frame.revalidate();
+        frame.pack();
+        frame.setSize(1200,800);
+        //myFrame.setVisible(true);
+    }
 }

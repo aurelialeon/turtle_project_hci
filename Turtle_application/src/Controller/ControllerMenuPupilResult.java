@@ -17,17 +17,17 @@ import javax.swing.JButton;
  */
 public class ControllerMenuPupilResult implements ActionListener{
     
-    private AcceuilPupil acceuilpup;
+    private AcceuilPupil acceuilpupil;
     private JButton resultVisuBtn;
 
-    public ControllerMenuPupilResult(AcceuilPupil acceuilpup, JButton resultVisuBtn) {
-        acceuilpup = acceuilpup;
-        resultVisuBtn = resultVisuBtn;
+    public ControllerMenuPupilResult(AcceuilPupil acceuilpup, JButton resultVisBtn) {
+        acceuilpupil = acceuilpup;
+        resultVisuBtn = resultVisBtn;
     }
     
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == resultVisuBtn) {
-            ResultVisu rV = new ResultVisu();
+            acceuilpupil.setPanel(new ResultVisu(acceuilpupil.getJfra()), acceuilpupil.getJfra());
         }
     }
     

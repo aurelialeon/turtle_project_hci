@@ -19,7 +19,6 @@ import javax.swing.JButton;
  */
 public class ControllerMenuPupilAttempt implements ActionListener{
         private AcceuilPupil acceuilpup;
-        private HomePage hp;
         private JButton attemptVisuBtn;
     
 public ControllerMenuPupilAttempt (AcceuilPupil acceuilpup, JButton attemptVisuBtn ) {
@@ -29,8 +28,7 @@ public ControllerMenuPupilAttempt (AcceuilPupil acceuilpup, JButton attemptVisuB
     
     public void actionPerformed(ActionEvent e) {
             if (e.getSource() == attemptVisuBtn) {
-                hp = new HomePage();
-                hp.setPanel(new AttemptVisu());  
+                acceuilpup.setPanel(new AttemptVisu(acceuilpup.getJfra()), acceuilpup.getJfra());  
             }
     }
 }
