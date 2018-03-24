@@ -34,7 +34,7 @@ public class Exploration extends JFrame implements ActionListener{
         
         this.setTitle("Exploration");
         
-        id = new Identification_Teacher();
+        //id = new Identification_Teacher();
         id.setVisible(false);
         
         don = new Donnees();
@@ -116,7 +116,7 @@ public class Exploration extends JFrame implements ActionListener{
     }
     
     public void createTree() {
-        //for (Class classe : id.getCurrentTeacher().getListClass(id.getCurrentTeacher().getIdT())) {
+        //for (Class classe : id.getCurrentTeacher().getListClass(id.getCurrentTeacher())) {
         for (Class classe : don.getTeach1().getListClass()) {
             DefaultMutableTreeNode laClasse = new DefaultMutableTreeNode(
                     (classe.getNameClass()));

@@ -103,6 +103,8 @@ public class ExercisePupil {
         start = new JButton("START");
         start.addActionListener(ep);
         
+        displayInstruction();
+        
     }
     
     public void press(ActionEvent e){
@@ -153,6 +155,7 @@ public class ExercisePupil {
             //ex.setCodeExercise(result);
         }else if (e.getSource() == start){
             myFrame.dispose();
+            start();
         }
     }
         
