@@ -5,6 +5,7 @@
  */
 package Application;
 import Controller.ActionAccueilExPupil;
+import Controller.ActionPupilAttemptEx;
 import Interface.TortueCouleur;
 import Interface.TortueG;
 import Interface.TortueRapide;
@@ -15,7 +16,6 @@ import javax.swing.*;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import turtle_project_hci.Attempt;
-import javax.swing.JComboBox;
 import turtle_project_hci.RequestSQLite;
 
 
@@ -24,115 +24,93 @@ import turtle_project_hci.RequestSQLite;
 /**
  * @author Felix
  */
-public final class AccueilExPupil extends JFrame
+public final class AccueilExPupil extends JPanel
 {
 
-    private Exercise myExercise;
+//    private Exercise myExercise;
 
-    private JButton backward, thisExercise;
+    private JButton backward, doExo;
     private JLabel text;
-    private JFrame frameOne, frameAEP;
-    
-    private JComboBox combo;
-
-
-
+    private JFrame frameAEP;
+    private JPanel tableAttempt;
 
     
 /**
  * Constructor of ExercicePupil
  */
     public AccueilExPupil (JFrame frame) {
-
+        ActionPupilAttemptEx apae;
         frameAEP = frame;
+        int numb;
         
-        //myExercise = new Exercise();
+        //Exercise myExercise;
+        int idExo;
         
-        frameOne = new JFrame();
-        frameOne.setTitle("Exercises");
-        frameOne.setSize(1200,800);
-        frameOne.setLocationRelativeTo(null);
-        frameOne.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-
-        Container myContainer = frameOne.getContentPane();
-        myContainer.setLayout(new GridBagLayout());
-        myContainer.setBackground(Color.WHITE);
+        //Container myContainer = frameOne.getContentPane();
+        this.setLayout(new GridBagLayout());
+        this.setBackground(Color.WHITE);
         GridBagConstraints gbc = new GridBagConstraints();
         
         //---Grid 0, 0 -------------
         gbc.gridx = 0;
         gbc.gridy = 0;
         backward = new JButton("Back");
+        backward.setFont(new Font("Serif", Font.PLAIN, 26));
         ActionAccueilExPupil ep = new ActionAccueilExPupil(this, backward);
-        myContainer.add(backward, gbc);
+        this.add(backward, gbc);
         backward.addActionListener(ep);
         
         //---Grid 0, 3 -------------
         gbc.gridy = 1;
-        text = new JLabel("Choose an exercise it is time to exercise !");
+        text = new JLabel("Choose an exercise !");
+        text.setFont(new Font("Serif", Font.PLAIN, 26));
 
-        frameOne.add(text, gbc);
-
-        // Combo box : menu deroulant avec la liste des exercices
-        gbc.gridy = 2;
-        combo = new JComboBox(); // Creation de la combobox
-
-        combo.setPreferredSize(new Dimension(400, 200));
+        this.add(text, gbc);
 
         ArrayList<Exercise> p = new ArrayList<>();
         RequestSQLite req = new RequestSQLite();
         p = req.fetchAllExerciseName();
-        for (Exercise exercise : p) {
-            combo.addItem(exercise.getNameExercise());
-        }
-        frameOne.add(combo,gbc);
-        //combo.addItemListener(new ItemState());
-        for (Exercise exercise : p){
-            if (exercise.getNameExercise()==combo.getSelectedItem()){
-                myExercise = exercise;
-            }
-        }
+        numb = p.size();
         
-        gbc.gridy=4;
-        thisExercise = new JButton("Exercise");
-        frameOne.add(thisExercise, gbc);
-        thisExercise.addActionListener(ep);
+        gbc.gridy = 2;
+        this.add(createExerciseList(p,numb),gbc);
 
-        
         //---Settings de fin--------
-        frameOne.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        frameOne.setResizable(true);
-        frameOne.pack();
-        frameOne.setVisible(true); // Setting the frame visible
-        
-        
-        
+        this.setVisible(true); // Setting the frame visible   
     }
-    
-    /**
-     * Class interne
-     */
-    class ItemState implements ItemListener {
-        public void itemStateChanged(ItemEvent e) {
-            System.out.println("événement déclenché sur : " + e.getItem());
-    }
-    }
-    /*
-    public void exerciceList () {
-        exo.setListAttempt(ArrayList<Attempt> listAttempt);
-    }*/
-    
-    public void press(ActionEvent e)
-    {
-        if (e.getSource() == thisExercise){
-            frameOne.dispose();
-            ExercisePupil aep = new ExercisePupil(myExercise);
 
+
+    private JPanel createExerciseList(ArrayList<Exercise> ex, int len) {
+        ActionPupilAttemptEx apae; 
+        int idExo;
+        
+        tableAttempt = new JPanel();
+        GridLayout table = new GridLayout(len,1);
+        tableAttempt.setLayout(table);
+        JLabel nameExercise; 
+        
+        if (tableAttempt != null) tableAttempt.removeAll();
+        
+        for (Exercise exo : ex) {
+            nameExercise = new JLabel(exo.getNameExercise(), SwingConstants.CENTER);
+            nameExercise.setFont(new Font("Serif", Font.PLAIN, 28));
+            idExo = exo.getIdEx();
+            doExo = new JButton("Let's go !");
+            doExo.setFont(new Font("Serif", Font.PLAIN, 26));
+            apae = new ActionPupilAttemptEx(this,doExo,idExo);
+            doExo.addActionListener(apae);
+            
+            tableAttempt.remove(nameExercise);
+            tableAttempt.add(nameExercise);
+            tableAttempt.remove(doExo);
+            tableAttempt.add(doExo);
+            tableAttempt.revalidate();
+            tableAttempt.repaint();
         }
-   
-
+        return(tableAttempt);  
+        
     }
-
+    
     public JFrame getFrameAEP() {
         return frameAEP;
     }
