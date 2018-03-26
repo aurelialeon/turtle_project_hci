@@ -49,6 +49,7 @@ public class AcceuilPupil extends JPanel{
         
         //---1er case du grid---------------------------------------------------
         exerciceBtn = new JButton("Exercices");
+        exerciceBtn.setFont(new Font("Serif", Font.PLAIN, 26));
         this.add(exerciceBtn, gbc);
         controlE = new ControllerMenuPupuilEx(this, exerciceBtn);
         exerciceBtn.addActionListener(controlE);
@@ -56,6 +57,7 @@ public class AcceuilPupil extends JPanel{
         //---2eme case----------------------------------------------------------
         gbc.gridy = 1;
         attemptVisuBtn = new JButton("Visualiser vos tentatives");
+        attemptVisuBtn.setFont(new Font("Serif", Font.PLAIN, 26));
         this.add(attemptVisuBtn, gbc);
         controlA = new ControllerMenuPupilAttempt(this,attemptVisuBtn);
         attemptVisuBtn.addActionListener(controlA);
@@ -63,6 +65,7 @@ public class AcceuilPupil extends JPanel{
         //---3eme case----------------------------------------------------------
         gbc.gridy = 2;
         resultVisuBtn = new JButton("Visualiser vos résultats");
+        resultVisuBtn.setFont(new Font("Serif", Font.PLAIN, 26));
         this.add(resultVisuBtn, gbc);
         controlR = new ControllerMenuPupilResult(this,resultVisuBtn);
         resultVisuBtn.addActionListener(controlR);

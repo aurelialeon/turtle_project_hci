@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Application.AttemptVisu;
+import Application.AccueilExPupil;
 import Application.ExercisePupil;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -17,29 +17,28 @@ import turtle_project_hci.RequestSQLite;
  *
  * @author cleme
  */
-
-public class ActionReattemptExercise implements ActionListener {
+public class ActionPupilAttemptEx implements ActionListener {
+    private AccueilExPupil acc; 
+    private JButton butt;
+    private int idExo; 
+    private Exercise exo;
     
-        private AttemptVisu att; 
-        private JButton but; 
-        private int ex;
-        private Exercise exo;
-        
-    public ActionReattemptExercise (AttemptVisu av, JButton button, int idExo) {
-        att = av; 
-        but = button;
-        ex = idExo;
+    public ActionPupilAttemptEx (AccueilExPupil aep, JButton btn, int id) {
+        acc = aep; 
+        butt = btn;
+        idExo = id;
     }
     
     public void actionPerformed (ActionEvent ae) {
-        if (ae.getSource() == but) {
+        if (ae.getSource() == butt) {
             // créer un nouvel objet Exercice à partir de l'id de l'exercice
             RequestSQLite req = new RequestSQLite();
             exo = new Exercise();
-            exo = req.createExerciseFromId(ex);
+            exo = req.createExerciseFromId(idExo);
             
             // diriger l'utilisateur vers le JPanel d'exercice correspondant
-            att.setPanel(new ExercisePupil(exo), att.getFrameAtt());
+            acc.setPanel(new ExercisePupil(exo), acc.getFrameAEP());
+            
         }
     }
 }

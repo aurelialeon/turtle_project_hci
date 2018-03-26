@@ -21,8 +21,8 @@ public class RequestSQLite {
     public void connect() {
         try {
             // db parameters
-            //String url = "jdbc:sqlite:C:\\sqlite\\gui\\gp4_Turtleproject.db";
-            String url = "jdbc:sqlite:/Users/manonsacre/sqlite/gui/gp4_Turtleproject.db";
+            String url = "jdbc:sqlite:C:\\sqlite\\gui\\gp4_Turtleproject.db";
+            //String url = "jdbc:sqlite:/Users/manonsacre/sqlite/gui/gp4_Turtleproject.db";
             // create a connection to the database
             conn = DriverManager.getConnection(url);
 
@@ -138,7 +138,7 @@ public class RequestSQLite {
         ArrayList<Exercise> listExercise = null;
 
         // creation of the request
-        String request = "SELECT nameEx FROM Exercise";
+        String request = "SELECT nameEx, idExercise FROM Exercise";
 
         // connection to the database
         connect();
@@ -153,6 +153,7 @@ public class RequestSQLite {
             while (rs.next()) {
                 newExercise = new Exercise();
                 newExercise.setNameExercise(rs.getString("nameEx"));
+                newExercise.setIdEx(rs.getInt("idExercise"));
                 listExercise.add(newExercise);
             }
             
@@ -534,4 +535,47 @@ public class RequestSQLite {
         return (listClass);
     }
     
+    /**
+     * Create a new Exercise object using the id of this exercise
+     * @param idExo the id of the exercise
+     */
+    public Exercise createExerciseFromId (int idExo) {
+        // Declaration of the variables
+        PreparedStatement pstmt = null;
+        ResultSet rs = null;
+        String nameEx;
+        String consigne;
+        String code;
+        Exercise newEx = null;
+
+        // creation of the request
+        String request = "SELECT nameEx, instruction, codeEx FROM Exercise WHERE idExercise = ?";
+
+        // connection to the database
+        connect();
+
+        try {
+            pstmt = conn.prepareStatement(request); // Creation of a statement
+            pstmt.setInt(1, idExo); // add the varaible into the sql request
+
+            rs = pstmt.executeQuery(); // Execution of the query
+
+            rs.next();
+            nameEx = rs.getString("nameEx"); // get the name of the pupil in the database
+            consigne = rs.getString("instruction");
+            code = rs.getString("codeEx");
+            
+            newEx = new Exercise();
+            
+            newEx.setNameExercise(nameEx);
+            newEx.setInstruction(consigne);
+            newEx.setCodeExercise(code);
+
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        } finally {
+            deconnect();
+        }
+        return (newEx);
+    }
 }
