@@ -5,6 +5,7 @@
  */
 package Application;
 
+import Controller.ControlMenuToCreateExercises;
 import Controller.ControlMenuToEvalAcc;
 import Controller.ControlMenuToExplore;
 import Controller.ControlMenuToModif;
@@ -42,7 +43,7 @@ public class Menu_Teacher extends JPanel {
         this.add(split);
         
         createB = new JButton("◊ Create exercice");
-        ControllerMenuToCreateExercises cmtce = new ControllerMenuToCreateExercises(this, createB);
+        ControlMenuToCreateExercises cmtce = new ControlMenuToCreateExercises(this, createB);
         createB.addActionListener(cmtce);
         
         modifyB = new JButton("◊ Modify exercice");
