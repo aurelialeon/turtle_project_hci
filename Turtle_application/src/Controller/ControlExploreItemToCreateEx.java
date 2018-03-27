@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Application.CreateExercises;
+import Application.CreateOneExercise;
 import Application.Exploration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,7 +26,7 @@ public class ControlExploreItemToCreateEx implements ActionListener{
     
     public void actionPerformed(ActionEvent ae) {
         if (ae.getSource() == it) { 
-            exp.setPanel(new CreateExercises(exp.getExploreFrame()), exp.getExploreFrame());
+            exp.setPanel(new CreateOneExercise(exp.getExploreFrame()), exp.getExploreFrame());
         }
     }
 }

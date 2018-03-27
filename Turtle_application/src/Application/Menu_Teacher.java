@@ -9,7 +9,6 @@ import Controller.ControlMenuToCreateExercises;
 import Controller.ControlMenuToEvalAcc;
 import Controller.ControlMenuToExplore;
 import Controller.ControlMenuToModif;
-import Controller.ControllerMenuToCreateExercises;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

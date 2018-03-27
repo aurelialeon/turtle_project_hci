@@ -6,7 +6,6 @@
 package Main;
 
 import Application.AccueilEvaluation;
-import Application.CreateExercises;
 import Application.HomePage;
 import Interface.Canvas;
 import Interface.CanvasTortue;

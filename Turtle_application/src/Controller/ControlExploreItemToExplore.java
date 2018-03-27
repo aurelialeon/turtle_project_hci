@@ -5,7 +5,7 @@
  */
 package Controller;
 
-import Application.CreateExercises;
+import Application.CreateOneExercise;
 import Application.Exploration;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
